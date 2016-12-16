@@ -2,7 +2,7 @@
 
 namespace Feedr\Interfaces;
 
-use Feedr\Entities\TempFile;
+use Feedr\Beans\TempFile;
 
 interface InputSource
 {

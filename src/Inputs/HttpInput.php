@@ -2,7 +2,7 @@
 
 namespace Feedr\Inputs;
 
-use Feedr\Entities\TempFile;
+use Feedr\Beans\TempFile;
 use Feedr\Interfaces\InputSource;
 use GuzzleHttp\Client;
 

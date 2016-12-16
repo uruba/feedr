@@ -1,6 +1,6 @@
 <?php
 
-namespace Feedr\Entities\Feed;
+namespace Feedr\Beans\Feed;
 
 class Feed {
 

@@ -17,7 +17,7 @@ class StringInput implements InputSource
 
 	/**
 	 * @param StringInput $tempPath
-	 * @return \Feedr\Entities\TempFile
+	 * @return \Feedr\Beans\TempFile
 	 */
 	public function createTempFile($tempPath)
 	{

@@ -2,7 +2,7 @@
 
 namespace Feedr\Inputs;
 
-use Feedr\Entities\TempFile;
+use Feedr\Beans\TempFile;
 use Feedr\Interfaces\InputSource;
 
 class FileInput implements InputSource
@@ -20,7 +20,7 @@ class FileInput implements InputSource
 
 	/**
 	 * @param string $tempPath
-	 * @return \Feedr\Entities\TempFile
+	 * @return \Feedr\Beans\TempFile
 	 */
 	public function createTempFile($tempPath)
 	{

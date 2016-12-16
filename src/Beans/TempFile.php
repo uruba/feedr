@@ -1,6 +1,6 @@
 <?php
 
-namespace Feedr\Entities;
+namespace Feedr\Beans;
 
 class TempFile
 {

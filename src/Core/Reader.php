@@ -2,7 +2,7 @@
 
 namespace Feedr\Core;
 
-use Feedr\Entities\TempFile;
+use Feedr\Beans\TempFile;
 use Feedr\Interfaces\InputSource;
 use Feedr\Interfaces\Specs\Spec;
 
