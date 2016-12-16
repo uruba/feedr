@@ -1,0 +1,24 @@
+{
+    "name": "uruba/feedr",
+    "description": "Super-lightweigt RSS and Atom feed reader",
+    "license": "Unlicense",
+    "authors": [
+        {
+          "name": "Václav Uruba",
+          "email": "uruba@outlook.com"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "~6.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Feedr\\": [
+                "src/"
+            ],
+            "Feedr\\Specs\\": [
+                "specs/"
+            ]
+        }
+    }
+}
