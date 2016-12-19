@@ -2,6 +2,10 @@
 
 namespace Feedr\Beans;
 
+/**
+ * Class TempFile
+ * @package Feedr\Beans
+ */
 class TempFile
 {
 
@@ -24,6 +28,12 @@ class TempFile
 	/** @var bool */
 	private $isDeleted;
 
+	/**
+	 * TempFile constructor.
+	 * @param $basePath
+	 * @param $filePrefix
+	 * @param array $fileMeta
+	 */
 	public function __construct($basePath, $filePrefix, $fileMeta = [])
 	{
 		$this->basePath = $basePath;

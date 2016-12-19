@@ -6,12 +6,20 @@ use Feedr\Beans\TempFile;
 use Feedr\Interfaces\InputSource;
 use GuzzleHttp\Client;
 
+/**
+ * Class HttpInput
+ * @package Feedr\Inputs
+ */
 class HttpInput implements InputSource
 {
 
 	/** @var Client */
 	private $guzzleClient;
 
+	/**
+	 * HttpInput constructor.
+	 * @param $httpLink
+	 */
 	public function __construct($httpLink)
 	{
 		$this->guzzleClient = new Client();

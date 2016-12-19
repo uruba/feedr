@@ -4,6 +4,10 @@ namespace Feedr\Interfaces;
 
 use Feedr\Beans\TempFile;
 
+/**
+ * Interface InputSource
+ * @package Feedr\Interfaces
+ */
 interface InputSource
 {
 

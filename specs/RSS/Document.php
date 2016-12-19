@@ -4,6 +4,10 @@ namespace Feedr\Specs\RSS;
 
 use Feedr\Interfaces\Specs\SpecDocument;
 
+/**
+ * Class Document
+ * @package Feedr\Specs\RSS
+ */
 class Document implements SpecDocument
 {
 

@@ -6,6 +6,10 @@ use Feedr\Core\Reader;
 use Feedr\Interfaces\InputSource;
 use Feedr\Interfaces\Specs\Spec;
 
+/**
+ * Class Feedr
+ * @package Feedr
+ */
 class Feedr
 {
 
@@ -18,6 +22,11 @@ class Feedr
 	/** @var Spec */
 	private $spec;
 
+	/**
+	 * Feedr constructor.
+	 * @param string $tempPath
+	 * @param Spec $mode
+	 */
 	public function __construct($tempPath, Spec $mode)
 	{
 		$this->tempPath = $tempPath;
@@ -26,11 +35,19 @@ class Feedr
 		$this->reader = new Reader($this->spec);
 	}
 
+	/**
+	 * @param InputSource $inputSource
+	 * @return Beans\Feed\Feed
+	 */
 	public function readFeed(InputSource $inputSource)
 	{
-		$this->reader->read($inputSource, $this->tempPath);
+		return $this->reader->read($inputSource, $this->tempPath);
 	}
 
+	/**
+	 * @param InputSource $inputSource
+	 * @param \DateTime $dateTime
+	 */
 	public function readFeedConstraintFrom(InputSource $inputSource, \DateTime $dateTime)
 	{
 

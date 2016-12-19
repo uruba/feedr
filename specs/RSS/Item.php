@@ -4,6 +4,10 @@ namespace Feedr\Specs\RSS;
 
 use Feedr\Interfaces\Specs\SpecItem;
 
+/**
+ * Class Item
+ * @package Feedr\Specs\RSS
+ */
 class Item implements SpecItem
 {
 

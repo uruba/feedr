@@ -8,6 +8,10 @@ use Feedr\Beans\TempFile;
 use Feedr\Interfaces\InputSource;
 use Feedr\Interfaces\Specs\Spec;
 
+/**
+ * Class Reader
+ * @package Feedr\Core
+ */
 class Reader
 {
 
@@ -39,6 +43,7 @@ class Reader
 	 * @param InputSource $inputSource
 	 * @param string $tempPath
 	 * @param boolean $deleteTempFile
+	 * @return Feed
 	 */
 	public function read(InputSource $inputSource, $tempPath, $deleteTempFile = TRUE)
 	{
@@ -133,6 +138,8 @@ class Reader
 		} while ($this->xmlReader->next());
 
 		$this->xmlReader->close();
+
+		return $feed;
 
 		// Delete the temp file if needed
 		if ($deleteTempFile) {

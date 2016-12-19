@@ -2,6 +2,10 @@
 
 namespace Feedr\Interfaces\Specs;
 
+/**
+ * Class Spec
+ * @package Feedr\Interfaces\Specs
+ */
 abstract class Spec
 {
 
@@ -11,6 +15,9 @@ abstract class Spec
 	/** @var SpecItem */
 	protected $specItem;
 
+	/**
+	 * Spec constructor.
+	 */
 	abstract public function __construct();
 
 	/** @return SpecDocument */

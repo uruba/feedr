@@ -2,6 +2,10 @@
 
 namespace Feedr\Beans\Feed;
 
+/**
+ * Class FeedItem
+ * @package Feedr\Beans\Feed
+ */
 class FeedItem
 {
 

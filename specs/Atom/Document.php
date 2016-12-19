@@ -4,6 +4,10 @@ namespace Feedr\Specs\Atom;
 
 use Feedr\Interfaces\Specs\SpecDocument;
 
+/**
+ * Class Document
+ * @package Feedr\Specs\Atom
+ */
 class Document implements SpecDocument
 {
 

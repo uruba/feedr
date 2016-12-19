@@ -4,6 +4,10 @@ namespace Feedr\Specs\Atom;
 
 use Feedr\Interfaces\Specs\SpecItem;
 
+/**
+ * Class Item
+ * @package Feedr\Specs\Atom
+ */
 class Item implements SpecItem
 {
 

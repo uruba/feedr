@@ -2,6 +2,10 @@
 
 namespace Feedr\Interfaces\Specs;
 
+/**
+ * Interface SpecDocument
+ * @package Feedr\Interfaces\Specs
+ */
 interface SpecDocument
 {
 

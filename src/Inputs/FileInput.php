@@ -5,6 +5,10 @@ namespace Feedr\Inputs;
 use Feedr\Beans\TempFile;
 use Feedr\Interfaces\InputSource;
 
+/**
+ * Class FileInput
+ * @package Feedr\Inputs
+ */
 class FileInput implements InputSource
 {
 
@@ -13,6 +17,10 @@ class FileInput implements InputSource
 	/** @var string */
 	private $sourceFilePath;
 
+	/**
+	 * FileInput constructor.
+	 * @param $sourceFilePath
+	 */
 	public function __construct($sourceFilePath)
 	{
 		$this->sourceFilePath = $sourceFilePath;
