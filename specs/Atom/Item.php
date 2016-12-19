@@ -8,7 +8,7 @@ class Item implements SpecItem
 {
 
 	/** @return string */
-	public function getPathRoot()
+	public function getRoot()
 	{
 		// TODO: Implement getPathRoot() method.
 	}

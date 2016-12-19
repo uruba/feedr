@@ -6,7 +6,7 @@ interface SpecItem
 {
 
 	/** @return string */
-	public function getPathRoot();
+	public function getRoot();
 
 	/** @return string */
 	public function getPathTitle();
