@@ -22,4 +22,9 @@ class RSS extends Spec
 		return self::SPEC_NAME;
 	}
 
+	public function getDateTimeFormat()
+	{
+		return \DateTime::RSS;
+	}
+
 }

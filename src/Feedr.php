@@ -23,12 +23,12 @@ class Feedr
 		$this->tempPath = $tempPath;
 		$this->spec = $mode;
 
-		$this->reader = new Reader();
+		$this->reader = new Reader($this->spec);
 	}
 
 	public function readFeed(InputSource $inputSource)
 	{
-		$this->reader->read($this->spec, $inputSource, $this->tempPath);
+		$this->reader->read($inputSource, $this->tempPath);
 	}
 
 	public function readFeedConstraintFrom(InputSource $inputSource, \DateTime $dateTime)
