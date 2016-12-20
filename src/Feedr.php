@@ -5,6 +5,8 @@ namespace Feedr;
 use Feedr\Core\Reader;
 use Feedr\Interfaces\InputSource;
 use Feedr\Interfaces\Specs\Spec;
+use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
 
 /**
  * Class Feedr
@@ -22,6 +24,9 @@ class Feedr
 	/** @var Spec */
 	private $spec;
 
+	/** @var LoggerInterface */
+	private $logger;
+
 	/**
 	 * Feedr constructor.
 	 * @param string $tempPath
@@ -31,6 +36,8 @@ class Feedr
 	{
 		$this->tempPath = $tempPath;
 		$this->spec = $mode;
+
+		$this->logger = new NullLogger();
 
 		$this->reader = new Reader($this->spec);
 	}
@@ -54,6 +61,14 @@ class Feedr
 	}
 
 	/**
+	 * @return LoggerInterface
+	 */
+	public function getLogger()
+	{
+		return $this->logger;
+	}
+
+	/**
 	 * @return Spec
 	 */
 	public function getMode()
@@ -67,6 +82,14 @@ class Feedr
 	public function getTempPath()
 	{
 		return $this->tempPath;
+	}
+
+	/**
+	 * @param LoggerInterface $logger
+	 */
+	public function setLogger($logger)
+	{
+		$this->logger = $logger;
 	}
 
 	/**

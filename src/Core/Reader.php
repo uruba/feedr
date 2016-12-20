@@ -7,6 +7,7 @@ use Feedr\Beans\Feed\FeedItem;
 use Feedr\Beans\TempFile;
 use Feedr\Interfaces\InputSource;
 use Feedr\Interfaces\Specs\Spec;
+use Psr\Log\LoggerInterface;
 
 /**
  * Class Reader
@@ -21,14 +22,18 @@ class Reader
 	/** @var Spec */
 	private $mode;
 
+	/** @var LoggerInterface */
+	private $logger;
+
 	/**
 	 * Reader constructor.
 	 * @param Spec $mode
 	 */
-	public function __construct(Spec $mode)
+	public function __construct(Spec $mode, LoggerInterface $logger)
 	{
 		$this->xmlReader = new \XMLReader();
 		$this->switchMode($mode);
+		$this->logger = $logger;
 	}
 
 	/**
@@ -101,7 +106,7 @@ class Reader
 			}
 		}
 
-		// TODO - maybe some logging?
+		$this->logger->info('Basic feed info was loaded');
 
 		// Iterate the item nodes
 		do {
@@ -136,6 +141,8 @@ class Reader
 					$feed->addItem($feedItem);
 			}
 		} while ($this->xmlReader->next());
+
+		$this->logger->info('The feed items were loaded');
 
 		$this->xmlReader->close();
 
