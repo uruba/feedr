@@ -23,28 +23,36 @@ class Document implements SpecDocument
 		return 'rss/channel';
 	}
 
-	/** @return string */
-	public function getPathTitle()
+	/** @return string[] */
+	public function getMandatoryElems()
 	{
-		return 'title';
+		return[
+			'title',
+			'link',
+			'description'
+		];
 	}
 
-	/** @return string */
-	public function getPathLink()
+	/** @return string[] */
+	public function getOptionalElems()
 	{
-		return 'link';
-	}
-
-	/** @return string */
-	public function getPathCreated()
-	{
-		return 'pubDate';
-	}
-
-	/** @return string */
-	public function getPathUpdated()
-	{
-		return 'lastBuildDate';
+		return[
+			'language',
+			'copyright',
+			'managingEditor',
+			'webMaster',
+			'pubDate',
+			'lastBuildDate',
+			'category',
+			'generator',
+			'docs',
+			'cloud',
+			'ttl',
+			'image',
+			'textInput',
+			'skipHours',
+			'skipDays'
+		];
 	}
 
 }

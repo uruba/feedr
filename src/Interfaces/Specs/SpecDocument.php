@@ -15,16 +15,10 @@ interface SpecDocument
 	/** @return string */
 	public function getRoot();
 
-	/** @return string */
-	public function getPathTitle();
+	/** @return string[] */
+	public function getMandatoryElems();
 
-	/** @return string */
-	public function getPathLink();
-
-	/** @return string */
-	public function getPathCreated();
-
-	/** @return string */
-	public function getPathUpdated();
+	/** @return string[] */
+	public function getOptionalElems();
 
 }

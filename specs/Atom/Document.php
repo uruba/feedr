@@ -23,28 +23,16 @@ class Document implements SpecDocument
 		// TODO: Implement getPathRoot() method.
 	}
 
-	/** @return string */
-	public function getPathTitle()
+	/** @return string[] */
+	public function getMandatoryElems()
 	{
-		// TODO: Implement getPathTitle() method.
+		// TODO: Implement getMandatoryElems() method.
 	}
 
-	/** @return string */
-	public function getPathLink()
+	/** @return string[] */
+	public function getOptionalElems()
 	{
-		// TODO: Implement getPathLink() method.
-	}
-
-	/** @return string */
-	public function getPathUpdated()
-	{
-		// TODO: Implement getPathUpdated() method.
-	}
-
-	/** @return string */
-	public function getPathCreated()
-	{
-		// TODO: Implement getPathCreated() method.
+		// TODO: Implement getOptionalElems() method.
 	}
 
 }

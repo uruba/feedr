@@ -17,34 +17,16 @@ class Item implements SpecItem
 		// TODO: Implement getPathRoot() method.
 	}
 
-	/** @return string */
-	public function getPathTitle()
+	/** @return string[] */
+	public function getMandatoryElems()
 	{
-		// TODO: Implement getPathTitle() method.
+		// TODO: Implement getMandatoryElems() method.
 	}
 
-	/** @return string */
-	public function getPathLink()
+	/** @return string[] */
+	public function getOptionalElems()
 	{
-		// TODO: Implement getPathLink() method.
-	}
-
-	/** @return string */
-	public function getPathSummary()
-	{
-		// TODO: Implement getPathSummary() method.
-	}
-
-	/** @return string */
-	public function getPathContent()
-	{
-		// TODO: Implement getPathContent() method.
-	}
-
-	/** @return string */
-	public function getPathAuthor()
-	{
-		// TODO: Implement getPathAuthor() method.
+		// TODO: Implement getOptionalElems() method.
 	}
 
 }

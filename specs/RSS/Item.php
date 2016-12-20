@@ -17,34 +17,32 @@ class Item implements SpecItem
 		return 'item';
 	}
 
-	/** @return string */
-	public function getPathTitle()
+	/**
+	 * @return string[]
+	 */
+	public function getMandatoryElems()
 	{
-		return 'title';
+		return [
+			'title',
+			'description'
+		];
 	}
 
-	/** @return string */
-	public function getPathLink()
+	/**
+	 * @return string[]
+	 */
+	public function getOptionalElems()
 	{
-		return 'link';
-	}
-
-	/** @return string */
-	public function getPathSummary()
-	{
-		return 'description';
-	}
-
-	/** @return string */
-	public function getPathContent()
-	{
-		return '';
-	}
-
-	/** @return string */
-	public function getPathAuthor()
-	{
-		return 'author';
+		return[
+			'link',
+			'author',
+			'category',
+			'comments',
+			'enclosure',
+			'guid',
+			'pubDate',
+			'source'
+		];
 	}
 
 }
