@@ -2,7 +2,7 @@
 
 namespace Feedr\Core;
 
-use Feedr\Beans\Feed\Feed;
+use Feedr\Beans\Feed;
 use Feedr\Beans\Feed\FeedItem;
 use Feedr\Beans\TempFile;
 use Feedr\Interfaces\InputSource;

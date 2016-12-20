@@ -37,7 +37,7 @@ class Feedr
 
 	/**
 	 * @param InputSource $inputSource
-	 * @return Beans\Feed\Feed
+	 * @return Feedr\Beans\Feed
 	 */
 	public function readFeed(InputSource $inputSource)
 	{

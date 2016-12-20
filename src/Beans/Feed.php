@@ -1,6 +1,6 @@
 <?php
 
-namespace Feedr\Beans\Feed;
+namespace Feedr\Beans;
 
 /**
  * Class Feed
