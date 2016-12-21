@@ -2,90 +2,56 @@
 
 namespace Feedr\Beans;
 
+use Feedr\Beans\Feed\FeedItem;
+use Feedr\Interfaces\Spec;
+
 /**
  * Class Feed
  * @package Feedr\Beans\Feed
  */
-class Feed
+class Feed // TODO - a partial duplication of Feedr\Beans\Feed\FeedItem class?
 {
 
-	/** @var string */
-	private $title;
-
-	/** @var string */
-	private $link;
-
-	/** @var \DateTime */
-	private $createdAt;
-
-	/** @var \DateTime */
-	private $updatedAt;
+	/** @var Spec */
+	private $spec;
 
 	/** @var FeedItem[] */
 	private $items;
 
+	/** @var array */
+	private $vals = [];
+
 	/**
-	 * @return string
+	 * Feed constructor.
+	 * @param Spec $spec
 	 */
-	public function getTitle()
+	public function __construct(Spec $spec)
 	{
-		return $this->title;
+		$this->spec = $spec;
 	}
 
 	/**
-	 * @param string $title
+	 * @param $name
 	 */
-	public function setTitle($title)
+	public function __get($name)
 	{
-		$this->title = $title;
+		if (in_array($name, $this->spec->getSpecDocument()->getAllElems())
+				&& isset($this->vals[$name])) {
+			return $this->vals[$name];
+		}
+
+		return NULL;
 	}
 
 	/**
-	 * @return string
+	 * @param $name
+	 * @param $value
 	 */
-	public function getLink()
+	public function __set($name, $value)
 	{
-		return $this->link;
-	}
-
-	/**
-	 * @param string $link
-	 */
-	public function setLink($link)
-	{
-		$this->link = $link;
-	}
-
-	/**
-	 * @return \DateTime
-	 */
-	public function getCreatedAt()
-	{
-		return $this->createdAt;
-	}
-
-	/**
-	 * @param \DateTime $createdAt
-	 */
-	public function setCreatedAt($createdAt)
-	{
-		$this->createdAt = $createdAt;
-	}
-
-	/**
-	 * @return \DateTime
-	 */
-	public function getUpdatedAt()
-	{
-		return $this->updatedAt;
-	}
-
-	/**
-	 * @param \DateTime $updatedAt
-	 */
-	public function setUpdatedAt($updatedAt)
-	{
-		$this->updatedAt = $updatedAt;
+		if (in_array($name, $this->spec->getSpecDocument()->getAllElems())) {
+			$this->vals[$name] = $value;
+		}
 	}
 
 	/**
@@ -107,7 +73,7 @@ class Feed
 	/**
 	 * @param FeedItem $item
 	 */
-	public function addItem($item)
+	public function addItem(FeedItem $item)
 	{
 		$this->items[] = $item;
 	}

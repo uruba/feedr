@@ -2,14 +2,20 @@
 
 namespace Feedr\Specs\Atom;
 
-use Feedr\Interfaces\Specs\SpecItem;
+use Feedr\Interfaces\Specs\SpecEntity;
 
 /**
  * Class Item
  * @package Feedr\Specs\Atom
  */
-class Item extends SpecItem
+class Item extends SpecEntity
 {
+
+	/** @return string[] */
+	public function getXMLNamespaces()
+	{
+		// TODO: Implement getXMLNamespaces() method.
+	}
 
 	/** @return string */
 	public function getRoot()

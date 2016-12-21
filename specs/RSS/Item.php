@@ -2,14 +2,20 @@
 
 namespace Feedr\Specs\RSS;
 
-use Feedr\Interfaces\Specs\SpecItem;
+use Feedr\Interfaces\Specs\SpecEntity;
 
 /**
  * Class Item
  * @package Feedr\Specs\RSS
  */
-class Item extends SpecItem
+class Item extends SpecEntity
 {
+
+	/** @return string[] */
+	public function getXMLNamespaces()
+	{
+		return [];
+	}
 
 	/** @return string */
 	public function getRoot()

@@ -6,7 +6,7 @@ use Feedr\Beans\Feed;
 use Feedr\Beans\Feed\FeedItem;
 use Feedr\Beans\TempFile;
 use Feedr\Interfaces\InputSource;
-use Feedr\Interfaces\Specs\Spec;
+use Feedr\Interfaces\Spec;
 use Psr\Log\LoggerInterface;
 
 /**
@@ -56,11 +56,14 @@ class Reader
 		$tempFile = $inputSource->createTempFile($tempPath);
 
 		// A container for the feed
-		$feed = new Feed();
+		$feed = new Feed($this->mode);
 
 		$this->xmlReader->open($tempFile->getFilePath());
 
-		foreach (explode('/', $this->mode->getSpecDocument()->getRoot()) as $pathPart) {
+		$specDocument = $this->mode->getSpecDocument();
+		$specItem = $this->mode->getSpecItem();
+
+		foreach (explode('/', $specDocument->getRoot()) as $pathPart) {
 			do {
 				$this->xmlReader->read();
 			} while ($this->xmlReader->nodeType !== \XMLReader::ELEMENT);
@@ -69,7 +72,7 @@ class Reader
 				throw new \Feedr\Exceptions\InvalidFeedException(
 					sprintf(
 						"The root path must be '%s'",
-						$this->mode->getSpecDocument()->getRoot()
+						$specDocument->getRoot()
 					)
 				);
 			}
@@ -78,30 +81,10 @@ class Reader
 		// Initialize the info about the feed
 		while ($this->xmlReader->read()) {
 			if ($this->xmlReader->nodeType === \XMLReader::ELEMENT) {
-				switch ($this->xmlReader->name) {
-					// Feed title
-					case $this->mode->getSpecDocument()->getPathTitle():
-						$feed->setTitle($this->getCurrentElementContent());
-						break;
-					// Feed link
-					case $this->mode->getSpecDocument()->getPathLink():
-						$feed->setLink($this->getCurrentElementContent());
-						break;
-					// Feed created at
-					case $this->mode->getSpecDocument()->getPathCreated():
-						$feed->setCreatedAt($this->convertStringToDateTime(
-							$this->getCurrentElementContent()
-						));
-						break;
-					// Feed updated at
-					case $this->mode->getSpecDocument()->getPathUpdated():
-						$feed->setUpdatedAt($this->convertStringToDateTime(
-							$this->getCurrentElementContent()
-						));
-						break;
-					// Items' parent element (no more main feed info past this point)
-					case $this->mode->getSpecItem()->getRoot():
-						break 2;
+				if (in_array($this->xmlReader->name, $specDocument->getAllElems())) {
+					$feed->{$this->xmlReader->name} = $this->getCurrentElementContent();
+				} else if ($this->xmlReader->name === $specItem->getRoot()) {
+					break;
 				}
 			}
 		}
@@ -111,31 +94,18 @@ class Reader
 		// Iterate the item nodes
 		do {
 			if ($this->xmlReader->nodeType === \XMLReader::ELEMENT &&
-				$this->xmlReader->name === $this->mode->getSpecItem()->getRoot()) {
+				$this->xmlReader->name === $specItem->getRoot()) {
 					$xmlElement = new \SimpleXMLElement($this->xmlReader->readOuterXML());
 
-					$feedItem = new FeedItem();
+					$feedItem = new FeedItem($this->mode);
 
-					// Item title
-					$feedItem->setTitle(
-						$this->getSubNodeValue($xmlElement, $this->mode->getSpecItem()->getPathTitle())
-					);
-					// Item link
-					$feedItem->setLink(
-						$this->getSubNodeValue($xmlElement, $this->mode->getSpecItem()->getPathLink())
-					);
-					// Item summary
-					$feedItem->setSummary(
-						$this->getSubNodeValue($xmlElement, $this->mode->getSpecItem()->getPathSummary())
-					);
-					// Item content
-					$feedItem->setContent(
-						$this->getSubNodeValue($xmlElement, $this->mode->getSpecItem()->getPathContent())
-					);
-					// Item author
-					$feedItem->setAuthor(
-						$this->getSubNodeValue($xmlElement, $this->mode->getSpecItem()->getPathAuthor())
-					);
+					foreach ($specItem->getAllElems() as $elem) {
+						$subNodeVal = $this->getSubNodeValue($xmlElement, $elem);
+
+						if (!empty($subNodeVal)) {
+							$feedItem->{$elem} = $subNodeVal;
+						}
+					}
 
 					// Add the item to the item array in the feed object
 					$feed->addItem($feedItem);
@@ -152,6 +122,22 @@ class Reader
 		if ($deleteTempFile) {
 			$tempFile->delete();
 		}
+	}
+
+	/**
+	 * @return LoggerInterface
+	 */
+	public function getLogger()
+	{
+		return $this->logger;
+	}
+
+	/**
+	 * @param LoggerInterface $logger
+	 */
+	public function setLogger($logger)
+	{
+		$this->logger = $logger;
 	}
 
 	/**
