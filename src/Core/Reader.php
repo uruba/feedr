@@ -149,7 +149,7 @@ class Reader
 	{
 		if ($this->xmlReader->nodeType === \XMLReader::ELEMENT) {
 			$this->xmlReader->read();
-			return trim($this->xmlReader->value);
+			return $this->convertStringToDateTime(trim($this->xmlReader->value));
 		}
 
 		return NULL;
@@ -162,16 +162,22 @@ class Reader
 	 */
 	private function getSubNodeValue(\SimpleXMLElement $element, $fieldName)
 	{
-		return (string) $element->{$fieldName};
+		return $this->convertStringToDateTime(trim((string) $element->{$fieldName}));
 	}
 
 	/**
 	 * @param string $dateTimeString
-	 * @return bool|\DateTime
+	 * @return string|\DateTime
 	 */
 	private function convertStringToDateTime($dateTimeString)
 	{
-		return \DateTime::createFromFormat($this->mode->getDateTimeFormat(), $dateTimeString);
+		$convertedDateTimeString = \DateTime::createFromFormat($this->mode->getDateTimeFormat(), $dateTimeString);
+
+		if ($convertedDateTimeString !== FALSE) {
+			return $convertedDateTimeString;
+		}
+
+		return $dateTimeString;
 	}
 
 }
