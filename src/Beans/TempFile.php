@@ -2,12 +2,13 @@
 
 namespace Feedr\Beans;
 use Feedr\Exceptions\TempFileException;
+use Feedr\Interfaces\TempResource;
 
 /**
  * Class TempFile
  * @package Feedr\Beans
  */
-class TempFile
+class TempFile implements TempResource
 {
 
 	const FILENAME_SECTION_SEPARATOR = '-';
@@ -26,9 +27,6 @@ class TempFile
 	/** @var string[] */
 	private $fileMeta;
 
-	/** @var bool */
-	private $isDeleted;
-
 	/**
 	 * TempFile constructor.
 	 * @param $basePath
@@ -42,57 +40,18 @@ class TempFile
 		$this->fileMeta = $fileMeta;
 
 		$this->createNewTempFile();
-		$this->isDeleted = FALSE;
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getBasePath()
-	{
-		return $this->basePath;
 	}
 
 	/**
 	 * @return string|null
 	 */
-	public function getFilePath()
+	public function getResourceUri()
 	{
 		if (empty($this->fileName)) {
 			return NULL;
 		}
 
-		return $this->basePath . (substr($this->basePath, -1) === '/' ? '' : '/') . $this->fileName;
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getFilePrefix()
-	{
-		return $this->filePrefix;
-	}
-
-	/**
-	 * @return array
-	 */
-	public function getFileMeta()
-	{
-		return $this->fileMeta;
-	}
-
-	public function delete()
-	{
-		unlink($this->getFilePath());
-		$this->isDeleted = TRUE;
-	}
-
-	/**
-	 * @return bool
-	 */
-	public function isDeleted()
-	{
-		return $this->isDeleted;
+		return 'file://' . $this->basePath . (substr($this->basePath, -1) === '/' ? '' : '/') . $this->fileName;
 	}
 
 	/**
@@ -100,7 +59,19 @@ class TempFile
 	 */
 	public function write($input)
 	{
-		file_put_contents($this->getFilePath(), $input);
+		file_put_contents($this->getResourceUri(), $input);
+	}
+
+	/**
+	 * @return string|null
+	 */
+	private function getFilePath()
+	{
+		if (empty($this->fileName)) {
+			return NULL;
+		}
+
+		return $this->basePath . (substr($this->basePath, -1) === '/' ? '' : '/') . $this->fileName;
 	}
 
 	private function createNewTempFile()
@@ -118,9 +89,9 @@ class TempFile
 
 		$this->fileName = $fileName;
 
-		$fileHandle = fopen($this->getFilePath(), 'w');
+		$fileHandle = fopen($this->getResourceUri(), 'w');
 		if ($fileHandle === FALSE) {
-			throw new TempFileException("Could not create/open the temp file in path \"{$this->getFilePath()}\"");
+			throw new TempFileException("Could not create/open the temp file in path \"{$this->getResourceUri()}\"");
 		}
 		fclose($fileHandle);
 	}

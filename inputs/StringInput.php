@@ -8,7 +8,7 @@ use Feedr\Interfaces\InputSource;
  * Class StringInput
  * @package Feedr\Inputs
  */
-class StringInput implements InputSource
+class StringInput extends InputSource
 {
 
 	/** @var StringInput */
@@ -27,7 +27,7 @@ class StringInput implements InputSource
 	 * @param StringInput $tempPath
 	 * @return \Feedr\Beans\TempFile
 	 */
-	public function createTempFile($tempPath)
+	public function createTempResource($tempPath)
 	{
 		// TODO: Implement createTempFile() method.
 	}

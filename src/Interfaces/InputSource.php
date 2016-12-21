@@ -3,6 +3,7 @@
 namespace Feedr\Interfaces;
 
 use Feedr\Beans\TempFile;
+use Feedr\Beans\TempStream;
 
 /**
  * Class InputSource
@@ -25,12 +26,16 @@ abstract class InputSource
 
 	/**
 	 * @param string $tempPath
-	 * @return TempFile
+	 * @return TempResource
 	 */
-	public function createTempFile($tempPath)
+	public function createTempResource($tempPath)
 	{
-		// initialize the temp file
-		$tempFile = new TempFile($tempPath, self::FILENAME_PREFIX, $this->getTempFileNameMeta());
+		// initialize the temp file/stream
+		if (empty($tempPath)) {
+			$tempFile = new TempStream();
+		} else {
+			$tempFile = new TempFile($tempPath, self::FILENAME_PREFIX, $this->getTempFileNameMeta());
+		}
 
 		// populate the temp file
 		$tempFile->write($this->createStream());

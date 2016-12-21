@@ -16,7 +16,7 @@ class Feedr
 {
 
 	/** @var string */
-	private $tempPath;
+	private $tempPath = '';
 
 	/** @var Reader */
 	private $reader;
@@ -26,12 +26,10 @@ class Feedr
 
 	/**
 	 * Feedr constructor.
-	 * @param string $tempPath
 	 * @param Spec $mode
 	 */
-	public function __construct($tempPath, Spec $mode)
+	public function __construct(Spec $mode)
 	{
-		$this->tempPath = $tempPath;
 		$this->spec = $mode;
 
 		$this->reader = new Reader($this->spec, new NullLogger());

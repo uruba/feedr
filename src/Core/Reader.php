@@ -7,6 +7,7 @@ use Feedr\Beans\Feed\FeedItem;
 use Feedr\Beans\TempFile;
 use Feedr\Interfaces\InputSource;
 use Feedr\Interfaces\Spec;
+use Feedr\Interfaces\TempResource;
 use Psr\Log\LoggerInterface;
 
 /**
@@ -50,10 +51,10 @@ class Reader
 	 * @param boolean $deleteTempFile
 	 * @return Feed
 	 */
-	public function read(InputSource $inputSource, $tempPath, $deleteTempFile = TRUE)
+	public function read(InputSource $inputSource, $tempPath)
 	{
-		/** @var TempFile $tempFile */
-		$tempFile = $inputSource->createTempFile($tempPath); // TODO - make it work also without temp files
+		/** @var TempResource $tempResource */
+		$tempResource = $inputSource->createTempResource($tempPath);
 
 		// A container for the feed
 		$feed = new Feed($this->mode);
@@ -63,12 +64,12 @@ class Reader
 		$specDocument = $this->mode->getSpecDocument();
 		$specItem = $this->mode->getSpecItem();
 
-		$xmlReader->open($tempFile->getFilePath());
+		$xmlReader->open($tempResource->getResourceUri());
 
 		foreach (explode('/', $specDocument->getRoot()) as $pathPart) {
 			do {
 				$xmlReader->read();
-			} while ($xmlReader->nodeType !== \XMLReader::ELEMENT);
+			} while ($xmlReader->nodeType !== \XMLReader::ELEMENT && $xmlReader->nodeType !== 0);
 
 			if ($xmlReader->name != $pathPart) {
 				throw new \Feedr\Exceptions\InvalidFeedException(
@@ -117,11 +118,6 @@ class Reader
 		$this->logger->info('The feed items were loaded');
 
 		$xmlReader->close();
-
-		// Delete the temp file if needed
-		if ($deleteTempFile) {
-			$tempFile->delete();
-		}
 
 		return $feed;
 	}
