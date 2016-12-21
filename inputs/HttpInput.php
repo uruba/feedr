@@ -10,7 +10,7 @@ use GuzzleHttp\Client;
  * Class HttpInput
  * @package Feedr\Inputs
  */
-class HttpInput implements InputSource  // TODO - make PSR-7 compatible instead of tying to Guzzle
+class HttpInput implements InputSource
 {
 
 	const FILENAME_PREFIX = 'http';
