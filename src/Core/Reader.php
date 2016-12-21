@@ -58,17 +58,19 @@ class Reader
 		// A container for the feed
 		$feed = new Feed($this->mode);
 
-		$this->xmlReader->open($tempFile->getFilePath());
+		$xmlReader = $this->xmlReader;
 
 		$specDocument = $this->mode->getSpecDocument();
 		$specItem = $this->mode->getSpecItem();
 
+		$xmlReader->open($tempFile->getFilePath());
+
 		foreach (explode('/', $specDocument->getRoot()) as $pathPart) {
 			do {
-				$this->xmlReader->read();
-			} while ($this->xmlReader->nodeType !== \XMLReader::ELEMENT);
+				$xmlReader->read();
+			} while ($xmlReader->nodeType !== \XMLReader::ELEMENT);
 
-			if ($this->xmlReader->name != $pathPart) {
+			if ($xmlReader->name != $pathPart) {
 				throw new \Feedr\Exceptions\InvalidFeedException(
 					sprintf(
 						"The root path must be '%s'",
@@ -79,11 +81,11 @@ class Reader
 		}
 
 		// Initialize the info about the feed
-		while ($this->xmlReader->read()) {
-			if ($this->xmlReader->nodeType === \XMLReader::ELEMENT) {
-				if (in_array($this->xmlReader->name, $specDocument->getAllElems())) {
-					$feed->{$this->xmlReader->name} = $this->getCurrentElementContent();
-				} else if ($this->xmlReader->name === $specItem->getRoot()) {
+		while ($xmlReader->read()) {
+			if ($xmlReader->nodeType === \XMLReader::ELEMENT) {
+				if (in_array($xmlReader->name, $specDocument->getAllElems())) {
+					$feed->{$xmlReader->name} = $this->getCurrentElementContent();
+				} else if ($xmlReader->name === $specItem->getRoot()) {
 					break;
 				}
 			}
@@ -93,9 +95,9 @@ class Reader
 
 		// Iterate the item nodes
 		do {
-			if ($this->xmlReader->nodeType === \XMLReader::ELEMENT &&
-				$this->xmlReader->name === $specItem->getRoot()) {
-					$xmlElement = new \SimpleXMLElement($this->xmlReader->readOuterXML());
+			if ($xmlReader->nodeType === \XMLReader::ELEMENT &&
+				$xmlReader->name === $specItem->getRoot()) {
+					$xmlElement = new \SimpleXMLElement($xmlReader->readOuterXML());
 
 					$feedItem = new FeedItem($this->mode);
 
@@ -110,11 +112,11 @@ class Reader
 					// Add the item to the item array in the feed object
 					$feed->addItem($feedItem);
 			}
-		} while ($this->xmlReader->next());
+		} while ($xmlReader->next());
 
 		$this->logger->info('The feed items were loaded');
 
-		$this->xmlReader->close();
+		$xmlReader->close();
 
 		return $feed;
 
