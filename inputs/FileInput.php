@@ -32,12 +32,14 @@ class FileInput implements InputSource
 	 */
 	public function createTempFile($tempPath)
 	{
+		// initialize the temp file
 		$baseName = explode('.', basename($tempPath));
 		$fileMeta['file_name'] = $baseName[0];
 
 		$tempFile = new TempFile($tempPath, self::FILENAME_PREFIX, $fileMeta);
 
-		copy($this->sourceFilePath, $tempFile->getFilePath());
+		// populate the temp file
+		$tempFile->write(file_get_contents($this->sourceFilePath));
 
 		return $tempFile;
 	}

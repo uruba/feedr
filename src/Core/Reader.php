@@ -118,12 +118,12 @@ class Reader
 
 		$xmlReader->close();
 
-		return $feed;
-
 		// Delete the temp file if needed
 		if ($deleteTempFile) {
 			$tempFile->delete();
 		}
+
+		return $feed;
 	}
 
 	/**

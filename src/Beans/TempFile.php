@@ -94,6 +94,14 @@ class TempFile
 		return $this->isDeleted;
 	}
 
+	/**
+	 * @param $input
+	 */
+	public function write($input)
+	{
+		file_put_contents($this->getFilePath(), $input);
+	}
+
 	private function createNewTempFile()
 	{
 		$timestamp = time();

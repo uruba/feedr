@@ -44,7 +44,7 @@ class HttpInput implements InputSource  // TODO - make PSR-7 compatible instead 
 		// populate the temp file
 		$response = $this->makeRequest($this->httpLink);
 
-		file_put_contents($tempFile->getFilePath(), $response);
+		$tempFile->write($response);
 
 		return $tempFile;
 	}
