@@ -53,7 +53,7 @@ class Reader
 	public function read(InputSource $inputSource, $tempPath, $deleteTempFile = TRUE)
 	{
 		/** @var TempFile $tempFile */
-		$tempFile = $inputSource->createTempFile($tempPath);
+		$tempFile = $inputSource->createTempFile($tempPath); // TODO - make it work also without temp files
 
 		// A container for the feed
 		$feed = new Feed($this->mode);

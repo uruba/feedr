@@ -83,7 +83,6 @@ class TempFile
 	public function delete()
 	{
 		unlink($this->getFilePath());
-		$this->fileHandle = NULL;
 		$this->isDeleted = TRUE;
 	}
 
