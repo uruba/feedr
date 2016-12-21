@@ -3,19 +3,26 @@
 namespace Feedr\Interfaces\Specs;
 
 /**
- * Interface SpecItem
+ * Class SpecItem
  * @package Feedr\Interfaces\Specs
  */
-interface SpecItem
+abstract class SpecItem
 {
 
 	/** @return string */
-	public function getRoot();
+	public abstract function getRoot();
 
 	/** @return string[] */
-	public function getMandatoryElems();
+	public abstract function getMandatoryElems();
 
 	/** @return string[] */
-	public function getOptionalElems();
+	public abstract function getOptionalElems();
+
+	/**
+	 * @return \string[]
+	 */
+	public function getAllElems() {
+		return $this->getMandatoryElems() + $this->getOptionalElems();
+	}
 
 }

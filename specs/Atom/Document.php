@@ -8,7 +8,7 @@ use Feedr\Interfaces\Specs\SpecDocument;
  * Class Document
  * @package Feedr\Specs\Atom
  */
-class Document implements SpecDocument
+class Document extends SpecDocument
 {
 
 	/** @return string[] */

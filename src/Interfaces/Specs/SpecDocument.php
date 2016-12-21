@@ -3,22 +3,29 @@
 namespace Feedr\Interfaces\Specs;
 
 /**
- * Interface SpecDocument
+ * Class SpecDocument
  * @package Feedr\Interfaces\Specs
  */
-interface SpecDocument
+abstract class SpecDocument
 {
 
 	/** @return string[] */
-	public function getXMLNamespaces();
+	public abstract function getXMLNamespaces();
 
 	/** @return string */
-	public function getRoot();
+	public abstract function getRoot();
 
 	/** @return string[] */
-	public function getMandatoryElems();
+	public abstract function getMandatoryElems();
 
 	/** @return string[] */
-	public function getOptionalElems();
+	public abstract function getOptionalElems();
+
+	/**
+	 * @return \string[]
+	 */
+	public function getAllElems() {
+		return $this->getMandatoryElems() + $this->getOptionalElems();
+	}
 
 }
