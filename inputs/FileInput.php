@@ -9,7 +9,7 @@ use Feedr\Interfaces\InputSource;
  * Class FileInput
  * @package Feedr\Inputs
  */
-class FileInput implements InputSource
+class FileInput extends InputSource
 {
 
 	const FILENAME_PREFIX = 'file';
@@ -27,21 +27,22 @@ class FileInput implements InputSource
 	}
 
 	/**
-	 * @param string $tempPath
-	 * @return \Feedr\Beans\TempFile
+	 * @return mixed
 	 */
-	public function createTempFile($tempPath)
+	public function createStream()
 	{
-		// initialize the temp file
+		file_get_contents($this->sourceFilePath);
+	}
+
+	/**
+	 * @return string[]
+	 */
+	public function getTempFileNameMeta()
+	{
 		$baseName = explode('.', basename($tempPath));
 		$fileMeta['file_name'] = $baseName[0];
 
-		$tempFile = new TempFile($tempPath, self::FILENAME_PREFIX, $fileMeta);
-
-		// populate the temp file
-		$tempFile->write(file_get_contents($this->sourceFilePath));
-
-		return $tempFile;
+		return $fileMeta;
 	}
 
 	/** @return string */

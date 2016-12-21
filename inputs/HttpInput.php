@@ -10,7 +10,7 @@ use GuzzleHttp\Client;
  * Class HttpInput
  * @package Feedr\Inputs
  */
-class HttpInput implements InputSource
+class HttpInput extends InputSource
 {
 
 	const FILENAME_PREFIX = 'http';
@@ -32,21 +32,23 @@ class HttpInput implements InputSource
 		$this->guzzleClient = new Client();
 	}
 
-	/** @return TempFile */
-	public function createTempFile($tempPath)
+	/**
+	 * @return mixed
+	 */
+	public function createStream()
 	{
-		// initialize the temp file
+		return $this->makeRequest($this->httpLink);
+	}
+
+	/**
+	 * @return string[]
+	 */
+	public function getTempFileNameMeta()
+	{
 		$urlHost = parse_url($this->httpLink);
 		$fileMeta['base_url'] = isset($urlHost['host']) ? str_replace('.', '_', $urlHost['host']) : '';
 
-		$tempFile = new TempFile($tempPath, self::FILENAME_PREFIX, $fileMeta);
-
-		// populate the temp file
-		$response = $this->makeRequest($this->httpLink);
-
-		$tempFile->write($response);
-
-		return $tempFile;
+		return $fileMeta;
 	}
 
 	/**
