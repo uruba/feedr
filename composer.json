@@ -17,6 +17,9 @@
             "Feedr\\": [
                 "src/"
             ],
+            "Feedr\\Inputs\\": [
+                "inputs/"
+            ],
             "Feedr\\Specs\\": [
                 "specs/"
             ]
