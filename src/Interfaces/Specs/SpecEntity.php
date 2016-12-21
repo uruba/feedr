@@ -3,10 +3,10 @@
 namespace Feedr\Interfaces\Specs;
 
 /**
- * Class SpecDocument
+ * Class SpecEntity
  * @package Feedr\Interfaces\Specs
  */
-abstract class SpecDocument
+abstract class SpecEntity
 {
 
 	/** @return string[] */

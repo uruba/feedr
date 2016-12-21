@@ -2,13 +2,13 @@
 
 namespace Feedr\Specs\Atom;
 
-use Feedr\Interfaces\Specs\SpecDocument;
+use Feedr\Interfaces\Specs\SpecEntity;
 
 /**
  * Class Document
  * @package Feedr\Specs\Atom
  */
-class Document extends SpecDocument
+class Document extends SpecEntity
 {
 
 	/** @return string[] */

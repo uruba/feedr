@@ -1,6 +1,8 @@
 <?php
 
-namespace Feedr\Interfaces\Specs;
+namespace Feedr\Interfaces;
+
+use Feedr\Interfaces\Specs\SpecEntity;
 
 /**
  * Class Spec
@@ -9,10 +11,10 @@ namespace Feedr\Interfaces\Specs;
 abstract class Spec
 {
 
-	/** @var SpecDocument */
+	/** @var SpecEntity */
 	protected $specDocument;
 
-	/** @var SpecItem */
+	/** @var SpecEntity */
 	protected $specItem;
 
 	/**
@@ -20,13 +22,13 @@ abstract class Spec
 	 */
 	abstract public function __construct();
 
-	/** @return SpecDocument */
+	/** @return SpecEntity */
 	public function getSpecDocument()
 	{
 		return $this->specDocument;
 	}
 
-	/** @return SpecItem */
+	/** @return SpecEntity */
 	public function getSpecItem()
 	{
 		return $this->specItem;

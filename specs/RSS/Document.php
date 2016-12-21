@@ -2,13 +2,13 @@
 
 namespace Feedr\Specs\RSS;
 
-use Feedr\Interfaces\Specs\SpecDocument;
+use Feedr\Interfaces\Specs\SpecEntity;
 
 /**
  * Class Document
  * @package Feedr\Specs\RSS
  */
-class Document extends SpecDocument
+class Document extends SpecEntity
 {
 
 	/** @return string[] */
