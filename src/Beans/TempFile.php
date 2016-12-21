@@ -1,6 +1,7 @@
 <?php
 
 namespace Feedr\Beans;
+use Feedr\Exceptions\TempFileException;
 
 /**
  * Class TempFile
@@ -107,20 +108,21 @@ class TempFile
 		$timestamp = time();
 
 		$fileName = $this->filePrefix;
-
 		if (is_array($this->fileMeta)) {
 			foreach ($this->fileMeta as $metaEntry) {
 				$fileName .= self::FILENAME_SECTION_SEPARATOR . (string) $metaEntry;
 			}
 		}
-
 		$fileName .= self::FILENAME_SECTION_SEPARATOR . $timestamp;
-
 		$fileName .= self::FILENAME_SUFFIX;
 
 		$this->fileName = $fileName;
 
-		fclose(fopen($this->getFilePath(), 'w'));
+		$fileHandle = fopen($this->getFilePath(), 'w');
+		if ($fileHandle === FALSE) {
+			throw new TempFileException("Could not create/open the temp file in path \"{$this->getFilePath()}\"");
+		}
+		fclose($fileHandle);
 	}
 
 }
