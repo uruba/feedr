@@ -31,7 +31,7 @@ class FileInput extends InputSource
 	 */
 	public function createStream()
 	{
-		file_get_contents($this->sourceFilePath);
+		return file_get_contents($this->sourceFilePath);
 	}
 
 	/**
