@@ -14,25 +14,39 @@ class Document extends SpecEntity
 	/** @return string[] */
 	public function getXMLNamespaces()
 	{
-		// TODO: Implement getXMLNamespaces() method.
+		return ['http://www.w3.org/2005/Atom'];
 	}
 
 	/** @return string */
 	public function getRoot()
 	{
-		// TODO: Implement getPathRoot() method.
+		return 'feed';
 	}
 
 	/** @return string[] */
 	public function getMandatoryElems()
 	{
-		// TODO: Implement getMandatoryElems() method.
+		return[
+			'id',
+			'title',
+			'updated'
+		];
 	}
 
 	/** @return string[] */
 	public function getOptionalElems()
 	{
-		// TODO: Implement getOptionalElems() method.
+		return[
+			'author',
+			'link',
+			'category',
+			'contributor',
+			'generator',
+			'icon',
+			'logo',
+			'rights',
+			'subtitle'
+		];
 	}
 
 }
