@@ -14,25 +14,39 @@ class Item extends SpecEntity
 	/** @return string[] */
 	public function getXMLNamespaces()
 	{
-		// TODO: Implement getXMLNamespaces() method.
+		return [];
 	}
 
 	/** @return string */
 	public function getRoot()
 	{
-		// TODO: Implement getPathRoot() method.
+		return 'entry';
 	}
 
 	/** @return string[] */
 	public function getMandatoryElems()
 	{
-		// TODO: Implement getMandatoryElems() method.
+		return [
+			'id',
+			'title',
+			'updated'
+		];
 	}
 
 	/** @return string[] */
 	public function getOptionalElems()
 	{
-		// TODO: Implement getOptionalElems() method.
+		return [
+			'author',
+			'content',
+			'link',
+			'summary',
+			'category',
+			'contributor',
+			'published',
+			'rights',
+			'source'
+		];
 	}
 
 }
