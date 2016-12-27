@@ -183,6 +183,7 @@ class Reader
 
 				$xmlElement = new \SimpleXMLElement($xmlReader->readOuterXML());
 
+				// TODO - this is not the right way
 				$lineNo = dom_import_simplexml($xmlElement)->getLineNo();
 
 				foreach ($mandatoryElemsItem as $key => $mandatoryElemItem) {
