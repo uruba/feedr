@@ -73,10 +73,11 @@ class Reader
 			}
 		}
 
+		$baseDepthDocument = $xmlReader->depth + 1;
+
 		// Initialize the info about the feed
-		// TODO - take into account the depth of the current element (this, as well as other places in code henceforth where needed)
 		while ($xmlReader->read()) {
-			if ($xmlReader->nodeType === \XMLReader::ELEMENT) {
+			if ($xmlReader->nodeType === \XMLReader::ELEMENT && $xmlReader->depth === $baseDepthDocument) {
 				if (in_array($xmlReader->name, $specDocument->getAllElems())) {
 					$feed->{$xmlReader->name} = $this->getCurrentElementContent($xmlReader);
 				} else if ($xmlReader->name === $specItem->getRoot()) {
@@ -90,6 +91,7 @@ class Reader
 		// Iterate the item nodes
 		do {
 			if ($xmlReader->nodeType === \XMLReader::ELEMENT &&
+				$xmlReader->depth === $baseDepthDocument &&
 				$xmlReader->name === $specItem->getRoot()) {
 					$xmlElement = new \SimpleXMLElement($xmlReader->readOuterXML());
 
@@ -170,11 +172,11 @@ class Reader
 		}
 
 		// Iterate the item nodes
-		// TODO - validate the depth with the mandatory elements (sub-elements shouldn't be counted towards mandatory elements)
 		$itemCount = 0;
 
 		do {
 			if ($xmlReader->nodeType === \XMLReader::ELEMENT &&
+				$xmlReader->depth === $baseDepthDocument &&
 				$xmlReader->name === $specItem->getRoot()) {
 
 				$itemCount++;
