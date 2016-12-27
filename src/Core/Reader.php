@@ -17,9 +17,6 @@ use Psr\Log\LoggerInterface;
 class Reader
 {
 
-	/** @var \XMLReader */
-	private $xmlReader;
-
 	/** @var Spec */
 	private $mode;
 
@@ -53,18 +50,13 @@ class Reader
 	 */
 	public function read(InputSource $inputSource, $tempPath)
 	{
-		/** @var TempResource $tempResource */
-		$tempResource = $inputSource->createTempResource($tempPath);
-
-		// A container for the feed
-		$feed = new Feed($this->mode);
-
-		$xmlReader = $this->xmlReader;
+		$xmlReader = $this->loadXmlReader($inputSource, $tempPath);
 
 		$specDocument = $this->mode->getSpecDocument();
 		$specItem = $this->mode->getSpecItem();
 
-		$xmlReader->open($tempResource->getResourceUri());
+		// A container for the feed
+		$feed = new Feed($this->mode);
 
 		foreach (explode('/', $specDocument->getRoot()) as $pathPart) {
 			do {
@@ -82,10 +74,11 @@ class Reader
 		}
 
 		// Initialize the info about the feed
+		// TODO - take into account the depth of the current element (this, as well as other places in code henceforth where needed)
 		while ($xmlReader->read()) {
 			if ($xmlReader->nodeType === \XMLReader::ELEMENT) {
 				if (in_array($xmlReader->name, $specDocument->getAllElems())) {
-					$feed->{$xmlReader->name} = $this->getCurrentElementContent();
+					$feed->{$xmlReader->name} = $this->getCurrentElementContent($xmlReader);
 				} else if ($xmlReader->name === $specItem->getRoot()) {
 					break;
 				}
@@ -123,6 +116,100 @@ class Reader
 	}
 
 	/**
+	 * @param InputSource $inputSource
+	 * @param $tempPath
+	 * @return array
+	 */
+	public function validate(InputSource $inputSource, $tempPath)
+	{
+		$xmlReader = $this->loadXmlReader($inputSource, $tempPath);
+
+		$specDocument = $this->mode->getSpecDocument();
+		$specItem = $this->mode->getSpecItem();
+
+		// A container for the feed
+		$feed = new Feed($this->mode);
+
+		$msgs = [];
+
+		$valid = TRUE;
+
+
+		foreach (explode('/', $specDocument->getRoot()) as $pathPart) {
+			do {
+				$xmlReader->read();
+			} while ($xmlReader->nodeType !== \XMLReader::ELEMENT && $xmlReader->nodeType !== 0);
+
+			if ($xmlReader->name != $pathPart) {
+				$valid = FALSE;
+				$msgs[] = sprintf(
+					"The root path must be '%s'",
+					$specDocument->getRoot()
+				);
+			}
+		}
+
+		$baseDepthDocument = $xmlReader->depth + 1;
+
+		// Iterate the mandatory document elements
+		$mandatoryElemsDocument = $specDocument->getMandatoryElems();
+
+		while ($xmlReader->read() && count($mandatoryElemsDocument) > 0) {
+			if ($xmlReader->nodeType === \XMLReader::ELEMENT && $xmlReader->depth === $baseDepthDocument) {
+				if ($xmlReader->name === $specItem->getRoot()) {
+					$valid = FALSE;
+					$msgs[] = sprintf(
+						"Not all mandatory document elements are present – elements '%s' are missing",
+						implode(', ', $mandatoryElemsDocument)
+					);
+					break;
+				} else if (($key = array_search($xmlReader->name, $mandatoryElemsDocument)) !== false) {
+					unset($mandatoryElemsDocument[$key]);
+				}
+			}
+		}
+
+		// Iterate the item nodes
+		// TODO - validate the depth with the mandatory elements (sub-elements shouldn't be counted towards mandatory elements)
+		$itemCount = 0;
+
+		do {
+			if ($xmlReader->nodeType === \XMLReader::ELEMENT &&
+				$xmlReader->name === $specItem->getRoot()) {
+
+				$itemCount++;
+
+				$mandatoryElemsItem = $specItem->getMandatoryElems();
+
+				$xmlElement = new \SimpleXMLElement($xmlReader->readOuterXML());
+
+				$lineNo = dom_import_simplexml($xmlElement)->getLineNo();
+
+				foreach ($mandatoryElemsItem as $key => $mandatoryElemItem) {
+					if (isset($xmlElement->{$mandatoryElemItem})) {
+						unset($mandatoryElemsItem[$key]);
+					}
+				}
+
+				if (count($mandatoryElemsItem) > 0) {
+					$valid = FALSE;
+					$msgs[] = sprintf(
+						"Not all mandatory elements are present in an entry beggining on line %u – elements '%s' are missing",
+						$lineNo,
+						implode(', ', $mandatoryElemsItem)
+					);
+				}
+			}
+		} while ($xmlReader->next());
+
+		$return['valid'] = $valid;
+		$return['messages'] = $msgs;
+		$return['item_count'] = $itemCount;
+
+		return $return;
+	}
+
+	/**
 	 * @return LoggerInterface
 	 */
 	public function getLogger()
@@ -139,13 +226,30 @@ class Reader
 	}
 
 	/**
+	 * @param InputSource $inputSource
+	 * @param $tempPath
+	 * @return \XMLReader
+	 */
+	private function loadXmlReader(InputSource $inputSource, $tempPath)
+	{
+		$xmlReader = new \XMLReader();
+
+		/** @var TempResource $tempResource */
+		$tempResource = $inputSource->createTempResource($tempPath);
+
+		$xmlReader->open($tempResource->getResourceUri());
+
+		return $xmlReader;
+	}
+
+	/**
 	 * @return null|string
 	 */
-	private function getCurrentElementContent()
+	private function getCurrentElementContent(\XMLReader $xmlReader)
 	{
-		if ($this->xmlReader->nodeType === \XMLReader::ELEMENT) {
-			$this->xmlReader->read();
-			return $this->convertStringToDateTime(trim($this->xmlReader->value));
+		if ($xmlReader->nodeType === \XMLReader::ELEMENT) {
+			$xmlReader->read();
+			return $this->convertStringToDateTime(trim($xmlReader->value));
 		}
 
 		return NULL;

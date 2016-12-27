@@ -54,6 +54,15 @@ class Feedr
 	}
 
 	/**
+	 * @param InputSource $inputSource
+	 * @return array
+	 */
+	public function validateFeed(InputSource $inputSource)
+	{
+		return $this->reader->validate($inputSource, $this->tempPath);
+	}
+
+	/**
 	 * @return LoggerInterface
 	 */
 	public function getLogger()
