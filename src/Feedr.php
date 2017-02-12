@@ -50,7 +50,7 @@ class Feedr
 	 */
 	public function readFeedConstraintFrom(InputSource $inputSource, \DateTime $dateTime)
 	{
-
+                // TODO - read only feed from a specified date(time) forth
 	}
 
 	/**
