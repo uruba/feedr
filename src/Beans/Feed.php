@@ -18,7 +18,7 @@ class Feed // TODO - a partial duplication of Feedr\Beans\Feed\FeedItem class?
 	/** @var FeedItem[] */
 	private $items;
 
-	/** @var array */
+	/** @var string[] */
 	private $vals = [];
 
 	/**
@@ -32,6 +32,7 @@ class Feed // TODO - a partial duplication of Feedr\Beans\Feed\FeedItem class?
 
 	/**
 	 * @param $name
+	 * @return string|null
 	 */
 	public function __get($name)
 	{
