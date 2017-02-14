@@ -11,40 +11,40 @@ use Feedr\Interfaces\InputSource;
 class StringInput extends InputSource
 {
 
-	/** @var StringInput */
-	private $feedString;
+    /** @var StringInput */
+    private $feedString;
 
-	/**
-	 * StringInput constructor.
-	 * @param $feedString
-	 */
-	public function __construct($feedString)
-	{
-		$this->feedString = $feedString;
-	}
+    /**
+     * StringInput constructor.
+     * @param $feedString
+     */
+    public function __construct($feedString)
+    {
+        $this->feedString = $feedString;
+    }
 
-	/**
-	 * @param StringInput $tempPath
-	 * @return \Feedr\Beans\TempFile
-	 */
-	public function createTempResource($tempPath)
-	{
-		// TODO: Implement createTempFile() method.
-	}
+    /**
+     * @param StringInput $tempPath
+     * @return \Feedr\Beans\TempFile
+     */
+    public function createTempResource($tempPath)
+    {
+        // TODO: Implement createTempFile() method.
+    }
 
-	/**
-	 * @return mixed
-	 */
-	public function createStream()
-	{
-		// TODO: Implement createStream() method.
-	}
+    /**
+     * @return mixed
+     */
+    public function createStream()
+    {
+        // TODO: Implement createStream() method.
+    }
 
-	/**
-	 * @return string[]
-	 */
-	public function getTempFileNameMeta()
-	{
-		// TODO: Implement getTempFileNameMeta() method.
-	}
+    /**
+     * @return string[]
+     */
+    public function getTempFileNameMeta()
+    {
+        // TODO: Implement getTempFileNameMeta() method.
+    }
 }

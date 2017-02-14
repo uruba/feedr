@@ -11,42 +11,42 @@ use Feedr\Interfaces\Specs\SpecEntity;
 class Document extends SpecEntity
 {
 
-	/** @return string[] */
-	public function getXMLNamespaces()
-	{
-		return ['http://www.w3.org/2005/Atom'];
-	}
+    /** @return string[] */
+    public function getXMLNamespaces()
+    {
+        return ['http://www.w3.org/2005/Atom'];
+    }
 
-	/** @return string */
-	public function getRoot()
-	{
-		return 'feed';
-	}
+    /** @return string */
+    public function getRoot()
+    {
+        return 'feed';
+    }
 
-	/** @return string[] */
-	public function getMandatoryElems()
-	{
-		return[
-			'id',
-			'title',
-			'updated'
-		];
-	}
+    /** @return string[] */
+    public function getMandatoryElems()
+    {
+        return[
+            'id',
+            'title',
+            'updated'
+        ];
+    }
 
-	/** @return string[] */
-	public function getOptionalElems()
-	{
-		return[
-			'author',
-			'link',
-			'category',
-			'contributor',
-			'generator',
-			'icon',
-			'logo',
-			'rights',
-			'subtitle'
-		];
-	}
+    /** @return string[] */
+    public function getOptionalElems()
+    {
+        return[
+            'author',
+            'link',
+            'category',
+            'contributor',
+            'generator',
+            'icon',
+            'logo',
+            'rights',
+            'subtitle'
+        ];
+    }
 
 }

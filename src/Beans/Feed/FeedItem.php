@@ -11,44 +11,44 @@ use Feedr\Interfaces\Spec;
 class FeedItem // TODO - a partial duplication of Feedr\Beans\Feed class?
 {
 
-	/** @var Spec */
-	private $spec;
+    /** @var Spec */
+    private $spec;
 
-	/** @var array */
-	private $vals = [];
+    /** @var array */
+    private $vals = [];
 
-	/**
-	 * FeedItem constructor.
-	 * @param Spec $spec
-	 */
-	public function __construct(Spec $spec)
-	{
-		$this->spec = $spec;
-	}
+    /**
+     * FeedItem constructor.
+     * @param Spec $spec
+     */
+    public function __construct(Spec $spec)
+    {
+        $this->spec = $spec;
+    }
 
-	/**
-	 * @param $name
-	 * @return mixed|null
-	 */
-	public function __get($name)
-	{
-		if (in_array($name, $this->spec->getSpecItem()->getAllElems())
-			&& isset($this->vals[$name])) {
-			return $this->vals[$name];
-		}
+    /**
+     * @param $name
+     * @return mixed|null
+     */
+    public function __get($name)
+    {
+        if (in_array($name, $this->spec->getSpecItem()->getAllElems())
+            && isset($this->vals[$name])) {
+            return $this->vals[$name];
+        }
 
-		return NULL;
-	}
+        return NULL;
+    }
 
-	/**
-	 * @param $name
-	 * @param $value
-	 */
-	public function __set($name, $value)
-	{
-		if (in_array($name, $this->spec->getSpecDocument()->getAllElems())) {
-			$this->vals[$name] = $value;
-		}
-	}
+    /**
+     * @param $name
+     * @param $value
+     */
+    public function __set($name, $value)
+    {
+        if (in_array($name, $this->spec->getSpecDocument()->getAllElems())) {
+            $this->vals[$name] = $value;
+        }
+    }
 
 }

@@ -12,43 +12,43 @@ use Feedr\Interfaces\InputSource;
 class FileInput extends InputSource
 {
 
-	const FILENAME_PREFIX = 'file';
+    const FILENAME_PREFIX = 'file';
 
-	/** @var string */
-	private $sourceFilePath;
+    /** @var string */
+    private $sourceFilePath;
 
-	/**
-	 * FileInput constructor.
-	 * @param $sourceFilePath
-	 */
-	public function __construct($sourceFilePath)
-	{
-		$this->sourceFilePath = $sourceFilePath;
-	}
+    /**
+     * FileInput constructor.
+     * @param $sourceFilePath
+     */
+    public function __construct($sourceFilePath)
+    {
+        $this->sourceFilePath = $sourceFilePath;
+    }
 
-	/**
-	 * @return mixed
-	 */
-	public function createStream()
-	{
-		return file_get_contents($this->sourceFilePath);
-	}
+    /**
+     * @return mixed
+     */
+    public function createStream()
+    {
+        return file_get_contents($this->sourceFilePath);
+    }
 
-	/**
-	 * @return string[]
-	 */
-	public function getTempFileNameMeta()
-	{
-		$baseName = explode('.', basename($tempPath));
-		$fileMeta['file_name'] = $baseName[0];
+    /**
+     * @return string[]
+     */
+    public function getTempFileNameMeta()
+    {
+        $baseName = explode('.', basename($tempPath));
+        $fileMeta['file_name'] = $baseName[0];
 
-		return $fileMeta;
-	}
+        return $fileMeta;
+    }
 
-	/** @return string */
-	public function getTempFileNamePrefix()
-	{
-		return self::FILENAME_PREFIX;
-	}
+    /** @return string */
+    public function getTempFileNamePrefix()
+    {
+        return self::FILENAME_PREFIX;
+    }
 
 }

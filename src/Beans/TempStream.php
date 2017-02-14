@@ -11,41 +11,41 @@ use Feedr\Interfaces\TempResource;
 class TempStream implements TempResource
 {
 
-	/**
-	 * @var resource
-	 */
-	private $tempHandle;
+    /**
+     * @var resource
+     */
+    private $tempHandle;
 
-	/**
-	 * TempStream constructor.
-	 */
-	public function __construct()
-	{
-		$this->tempHandle = $this->createNewTempStream();
-	}
+    /**
+     * TempStream constructor.
+     */
+    public function __construct()
+    {
+        $this->tempHandle = $this->createNewTempStream();
+    }
 
-	/**
-	 * @return string|null
-	 */
-	public function getResourceUri()
-	{
-		return stream_get_meta_data($this->tempHandle)['uri'];
-	}
+    /**
+     * @return string|null
+     */
+    public function getResourceUri()
+    {
+        return stream_get_meta_data($this->tempHandle)['uri'];
+    }
 
-	/**
-	 * @param $input
-	 */
-	public function write($input)
-	{
-		fwrite($this->tempHandle, $input);
-	}
+    /**
+     * @param $input
+     */
+    public function write($input)
+    {
+        fwrite($this->tempHandle, $input);
+    }
 
-	/**
-	 * @return resource
-	 */
-	private function createNewTempStream()
-	{
-		return tmpfile(); // TODO - find out a way how to get this working with 'php://temp'
-	}
+    /**
+     * @return resource
+     */
+    private function createNewTempStream()
+    {
+        return tmpfile(); // TODO - find out a way how to get this working with 'php://temp'
+    }
 
 }

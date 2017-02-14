@@ -13,31 +13,31 @@ use Feedr\Specs\Atom\Item;
 class Atom extends Spec
 {
 
-	const SPEC_NAME = 'Atom';
+    const SPEC_NAME = 'Atom';
 
-	/**
-	 * Atom constructor.
-	 */
-	public function __construct()
-	{
-		$this->specDocument = new Document();
-		$this->specItem = new Item();
-	}
+    /**
+     * Atom constructor.
+     */
+    public function __construct()
+    {
+        $this->specDocument = new Document();
+        $this->specItem = new Item();
+    }
 
-	/**
-	 * @return string
-	 */
-	public function getSpecName()
-	{
-		return self::SPEC_NAME;
-	}
+    /**
+     * @return string
+     */
+    public function getSpecName()
+    {
+        return self::SPEC_NAME;
+    }
 
-	/**
-	 * @return string
-	 */
-	public function getDateTimeFormat()
-	{
-		return \DateTime::ATOM;
-	}
+    /**
+     * @return string
+     */
+    public function getDateTimeFormat()
+    {
+        return \DateTime::ATOM;
+    }
 
 }

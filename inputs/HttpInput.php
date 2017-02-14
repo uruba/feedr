@@ -13,51 +13,51 @@ use GuzzleHttp\Client;
 class HttpInput extends InputSource
 {
 
-	const FILENAME_PREFIX = 'http';
+    const FILENAME_PREFIX = 'http';
 
-	/** @var Client */
-	private $guzzleClient;
+    /** @var Client */
+    private $guzzleClient;
 
-	/** @var string */
-	private $httpLink;
+    /** @var string */
+    private $httpLink;
 
-	/**
-	 * HttpInput constructor.
-	 * @param $httpLink
-	 */
-	public function __construct($httpLink)
-	{
-		$this->httpLink = $httpLink;
+    /**
+     * HttpInput constructor.
+     * @param $httpLink
+     */
+    public function __construct($httpLink)
+    {
+        $this->httpLink = $httpLink;
 
-		$this->guzzleClient = new Client();
-	}
+        $this->guzzleClient = new Client();
+    }
 
-	/**
-	 * @return mixed
-	 */
-	public function createStream()
-	{
-		return $this->makeRequest($this->httpLink);
-	}
+    /**
+     * @return mixed
+     */
+    public function createStream()
+    {
+        return $this->makeRequest($this->httpLink);
+    }
 
-	/**
-	 * @return string[]
-	 */
-	public function getTempFileNameMeta()
-	{
-		$urlHost = parse_url($this->httpLink);
-		$fileMeta['base_url'] = isset($urlHost['host']) ? str_replace('.', '_', $urlHost['host']) : '';
+    /**
+     * @return string[]
+     */
+    public function getTempFileNameMeta()
+    {
+        $urlHost = parse_url($this->httpLink);
+        $fileMeta['base_url'] = isset($urlHost['host']) ? str_replace('.', '_', $urlHost['host']) : '';
 
-		return $fileMeta;
-	}
+        return $fileMeta;
+    }
 
-	/**
-	 * @param $httpLink
-	 */
-	private function makeRequest($httpLink)
-	{
-		$resource = $this->guzzleClient->request('GET', $httpLink);
-		return $resource->getBody();
-	}
+    /**
+     * @param $httpLink
+     */
+    private function makeRequest($httpLink)
+    {
+        $resource = $this->guzzleClient->request('GET', $httpLink);
+        return $resource->getBody();
+    }
 
 }
