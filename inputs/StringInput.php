@@ -32,4 +32,19 @@ class StringInput extends InputSource
 		// TODO: Implement createTempFile() method.
 	}
 
+	/**
+	 * @return mixed
+	 */
+	public function createStream()
+	{
+		// TODO: Implement createStream() method.
+	}
+
+	/**
+	 * @return string[]
+	 */
+	public function getTempFileNameMeta()
+	{
+		// TODO: Implement getTempFileNameMeta() method.
+	}
 }

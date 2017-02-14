@@ -28,6 +28,7 @@ class FeedItem // TODO - a partial duplication of Feedr\Beans\Feed class?
 
 	/**
 	 * @param $name
+	 * @return mixed|null
 	 */
 	public function __get($name)
 	{
