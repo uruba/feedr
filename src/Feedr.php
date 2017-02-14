@@ -37,11 +37,12 @@ class Feedr
 
 	/**
 	 * @param InputSource $inputSource
-	 * @return Feedr\Beans\Feed
+	 * @param bool $validate
+	 * @return Beans\Feed
 	 */
-	public function readFeed(InputSource $inputSource)
+	public function readFeed(InputSource $inputSource, $validate = TRUE)
 	{
-		return $this->reader->read($inputSource, $this->tempPath);
+		return $this->reader->read($inputSource, $this->tempPath, $validate);
 	}
 
 	/**

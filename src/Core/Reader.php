@@ -4,7 +4,6 @@ namespace Feedr\Core;
 
 use Feedr\Beans\Feed;
 use Feedr\Beans\Feed\FeedItem;
-use Feedr\Beans\TempFile;
 use Feedr\Interfaces\InputSource;
 use Feedr\Interfaces\Spec;
 use Feedr\Interfaces\TempResource;
@@ -45,11 +44,15 @@ class Reader
 	/**
 	 * @param InputSource $inputSource
 	 * @param string $tempPath
-	 * @param boolean $deleteTempFile
+	 * @param bool $validate
 	 * @return Feed
 	 */
-	public function read(InputSource $inputSource, $tempPath)
+	public function read(InputSource $inputSource, $tempPath, $validate)
 	{
+		if ($validate) {
+			$this->validate($inputSource, $tempPath);
+		}
+
 		$xmlReader = $this->loadXmlReader($inputSource, $tempPath);
 
 		$specDocument = $this->mode->getSpecDocument();
@@ -128,9 +131,6 @@ class Reader
 
 		$specDocument = $this->mode->getSpecDocument();
 		$specItem = $this->mode->getSpecItem();
-
-		// A container for the feed
-		$feed = new Feed($this->mode);
 
 		$msgs = [];
 
@@ -246,13 +246,31 @@ class Reader
 	}
 
 	/**
+	 * @param \XMLReader $xmlReader
 	 * @return null|string
 	 */
 	private function getCurrentElementContent(\XMLReader $xmlReader)
 	{
 		if ($xmlReader->nodeType === \XMLReader::ELEMENT) {
+			$elemDepth = $xmlReader->depth;
+
 			$xmlReader->read();
-			return $this->convertStringToDateTime(trim($xmlReader->value));
+			$currentVal = $this->convertStringToDateTime(trim($xmlReader->value));
+
+
+			$subElems = [];
+			do {
+				$xmlReader->read();
+				if ($xmlReader->nodeType === \XMLReader::ELEMENT) {
+					$subElems[$xmlReader->name] = $this->getCurrentElementContent($xmlReader);
+				}
+			} while (!($xmlReader->nodeType === \XMLReader::END_ELEMENT && $xmlReader->depth === $elemDepth));
+
+			if (!empty($subElems)) {
+				$currentVal = $subElems;
+			}
+
+			return $currentVal;
 		}
 
 		return NULL;
