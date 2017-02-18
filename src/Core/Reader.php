@@ -47,10 +47,10 @@ class Reader
      * @param bool $validate
      * @return Feed
      */
-    public function read(InputSource $inputSource, $tempPath, $validate)
+    public function read(InputSource $inputSource, $validate, $tempPath = '')
     {
         if ($validate) {
-            $this->validate($inputSource, $tempPath);
+            $this->validate($inputSource);
         }
 
         $xmlReader = $this->loadXmlReader($inputSource, $tempPath);
@@ -125,7 +125,7 @@ class Reader
      * @param $tempPath
      * @return array
      */
-    public function validate(InputSource $inputSource, $tempPath)
+    public function validate(InputSource $inputSource, $tempPath = '')
     {
         $xmlReader = $this->loadXmlReader($inputSource, $tempPath);
 

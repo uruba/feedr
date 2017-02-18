@@ -42,7 +42,7 @@ class Feedr
      */
     public function readFeed(InputSource $inputSource, $validate = true)
     {
-        return $this->reader->read($inputSource, $this->tempPath, $validate);
+        return $this->reader->read($inputSource, $validate, $this->tempPath);
     }
 
     /**
