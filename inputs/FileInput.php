@@ -39,8 +39,7 @@ class FileInput extends InputSource
      */
     public function getTempFileNameMeta()
     {
-        // TODO – non-existent variable – fix this
-        $baseName = explode('.', basename($tempPath));
+        $baseName = explode('.', basename($this->sourceFilePath));
         $fileMeta['file_name'] = $baseName[0];
 
         return $fileMeta;
