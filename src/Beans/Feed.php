@@ -79,4 +79,9 @@ class Feed // TODO - a partial duplication of Feedr\Beans\Feed\FeedItem class?
         $this->items[] = $item;
     }
 
+    public function getSpec()
+    {
+        return $this->spec;
+    }
+
 }
