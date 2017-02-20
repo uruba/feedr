@@ -2,51 +2,19 @@
 
 namespace Feedr\Beans\Feed;
 
-use Feedr\Interfaces\Spec;
+use Feedr\Interfaces\Feed\FeedEntity;
 
 /**
  * Class FeedItem
  * @package Feedr\Beans\Feed
  */
-class FeedItem // TODO - a partial duplication of Feedr\Beans\Feed class?
+class FeedItem extends FeedEntity
 {
-    /** @var Spec */
-    private $spec;
-
-    /** @var array */
-    private $vals = [];
-
     /**
-     * FeedItem constructor.
-     * @param Spec $spec
+     * @return \Feedr\Interfaces\Specs\SpecEntity
      */
-    public function __construct(Spec $spec)
+    public function getSpecEntity()
     {
-        $this->spec = $spec;
-    }
-
-    /**
-     * @param $name
-     * @return mixed|null
-     */
-    public function __get($name)
-    {
-        if (in_array($name, $this->spec->getSpecItem()->getAllElems())
-            && isset($this->vals[$name])) {
-            return $this->vals[$name];
-        }
-
-        return null;
-    }
-
-    /**
-     * @param $name
-     * @param $value
-     */
-    public function __set($name, $value)
-    {
-        if (in_array($name, $this->spec->getSpecDocument()->getAllElems())) {
-            $this->vals[$name] = $value;
-        }
+        return $this->spec->getSpecItem();
     }
 }

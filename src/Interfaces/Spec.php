@@ -34,7 +34,7 @@ abstract class Spec
     }
 
     /** @return string */
-    abstract public function getSpecName();
+    abstract public function getName();
 
     /** @return string */
     abstract public function getDateTimeFormat();

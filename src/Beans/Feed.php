@@ -3,56 +3,16 @@
 namespace Feedr\Beans;
 
 use Feedr\Beans\Feed\FeedItem;
-use Feedr\Interfaces\Spec;
+use Feedr\Interfaces\Feed\FeedEntity;
 
 /**
  * Class Feed
  * @package Feedr\Beans\Feed
  */
-class Feed // TODO - a partial duplication of Feedr\Beans\Feed\FeedItem class?
+class Feed extends FeedEntity
 {
-    /** @var Spec */
-    private $spec;
-
     /** @var FeedItem[] */
     private $items;
-
-    /** @var string[] */
-    private $vals = [];
-
-    /**
-     * Feed constructor.
-     * @param Spec $spec
-     */
-    public function __construct(Spec $spec)
-    {
-        $this->spec = $spec;
-    }
-
-    /**
-     * @param $name
-     * @return string|null
-     */
-    public function __get($name)
-    {
-        if (in_array($name, $this->spec->getSpecDocument()->getAllElems())
-                && isset($this->vals[$name])) {
-            return $this->vals[$name];
-        }
-
-        return null;
-    }
-
-    /**
-     * @param $name
-     * @param $value
-     */
-    public function __set($name, $value)
-    {
-        if (in_array($name, $this->spec->getSpecDocument()->getAllElems())) {
-            $this->vals[$name] = $value;
-        }
-    }
 
     /**
      * @return FeedItem[]
@@ -78,8 +38,11 @@ class Feed // TODO - a partial duplication of Feedr\Beans\Feed\FeedItem class?
         $this->items[] = $item;
     }
 
-    public function getSpec()
+    /**
+     * @return \Feedr\Interfaces\Specs\SpecEntity
+     */
+    public function getSpecEntity()
     {
-        return $this->spec;
+        return $this->spec->getSpecDocument();
     }
 }

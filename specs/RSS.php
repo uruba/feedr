@@ -26,7 +26,7 @@ class RSS extends Spec
     /**
      * @return string
      */
-    public function getSpecName()
+    public function getName()
     {
         return self::SPEC_NAME;
     }
