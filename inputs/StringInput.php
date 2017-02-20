@@ -10,7 +10,6 @@ use Feedr\Interfaces\InputSource;
  */
 class StringInput extends InputSource
 {
-
     /** @var StringInput */
     private $feedString;
 

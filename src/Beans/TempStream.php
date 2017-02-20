@@ -1,7 +1,7 @@
 <?php
 
 namespace Feedr\Beans;
-use Feedr\Exceptions\TempFileException;
+
 use Feedr\Interfaces\TempResource;
 
 /**
@@ -10,7 +10,6 @@ use Feedr\Interfaces\TempResource;
  */
 class TempStream implements TempResource
 {
-
     /**
      * @var resource
      */
@@ -47,5 +46,4 @@ class TempStream implements TempResource
     {
         return tmpfile(); // TODO - find out a way how to get this working with 'php://temp'
     }
-
 }

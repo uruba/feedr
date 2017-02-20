@@ -12,7 +12,6 @@ use Feedr\Specs\Atom\Item;
  */
 class Atom extends Spec
 {
-
     const SPEC_NAME = 'Atom';
 
     /**
@@ -39,5 +38,4 @@ class Atom extends Spec
     {
         return \DateTime::ATOM;
     }
-
 }

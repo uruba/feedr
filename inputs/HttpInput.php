@@ -2,7 +2,6 @@
 
 namespace Feedr\Inputs;
 
-use Feedr\Beans\TempFile;
 use Feedr\Interfaces\InputSource;
 use GuzzleHttp\Client;
 
@@ -12,7 +11,6 @@ use GuzzleHttp\Client;
  */
 class HttpInput extends InputSource
 {
-
     const FILENAME_PREFIX = 'http';
 
     /** @var Client */
@@ -53,11 +51,11 @@ class HttpInput extends InputSource
 
     /**
      * @param $httpLink
+     * @return \Psr\Http\Message\StreamInterface
      */
     private function makeRequest($httpLink)
     {
         $resource = $this->guzzleClient->request('GET', $httpLink);
         return $resource->getBody();
     }
-
 }

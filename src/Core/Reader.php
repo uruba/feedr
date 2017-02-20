@@ -15,7 +15,6 @@ use Psr\Log\LoggerInterface;
  */
 class Reader
 {
-
     /** @var Spec */
     private $mode;
 
@@ -300,5 +299,4 @@ class Reader
 
         return $dateTimeString;
     }
-
 }

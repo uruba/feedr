@@ -2,7 +2,6 @@
 
 namespace Feedr\Inputs;
 
-use Feedr\Beans\TempFile;
 use Feedr\Interfaces\InputSource;
 
 /**
@@ -11,7 +10,6 @@ use Feedr\Interfaces\InputSource;
  */
 class FileInput extends InputSource
 {
-
     const FILENAME_PREFIX = 'file';
 
     /** @var string */
@@ -50,5 +48,4 @@ class FileInput extends InputSource
     {
         return self::FILENAME_PREFIX;
     }
-
 }

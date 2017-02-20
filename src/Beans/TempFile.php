@@ -1,6 +1,7 @@
 <?php
 
 namespace Feedr\Beans;
+
 use Feedr\Exceptions\TempFileException;
 use Feedr\Interfaces\TempResource;
 
@@ -48,7 +49,7 @@ class TempFile implements TempResource
     public function getResourceUri()
     {
         if (empty($this->fileName)) {
-            return NULL;
+            return null;
         }
 
         return 'file://' . $this->basePath . (substr($this->basePath, -1) === '/' ? '' : '/') . $this->fileName;
@@ -65,10 +66,10 @@ class TempFile implements TempResource
     /**
      * @return string|null
      */
-    private function getFilePath()
+    public function getFilePath()
     {
         if (empty($this->fileName)) {
-            return NULL;
+            return null;
         }
 
         return $this->basePath . (substr($this->basePath, -1) === '/' ? '' : '/') . $this->fileName;
@@ -90,10 +91,9 @@ class TempFile implements TempResource
         $this->fileName = $fileName;
 
         $fileHandle = fopen($this->getResourceUri(), 'w');
-        if ($fileHandle === FALSE) {
+        if ($fileHandle === false) {
             throw new TempFileException("Could not create/open the temp file in path \"{$this->getResourceUri()}\"");
         }
         fclose($fileHandle);
     }
-
 }

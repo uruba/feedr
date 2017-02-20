@@ -10,7 +10,6 @@ use Feedr\Interfaces\Specs\SpecEntity;
  */
 class Item extends SpecEntity
 {
-
     /** @return string[] */
     public function getXMLNamespaces()
     {
@@ -48,5 +47,4 @@ class Item extends SpecEntity
             'source'
         ];
     }
-
 }

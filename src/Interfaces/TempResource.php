@@ -8,15 +8,13 @@ namespace Feedr\Interfaces;
  */
 interface TempResource
 {
+    /**
+     * @return string
+     */
+    public function getResourceUri();
 
-	/**
-	 * @return string
-	 */
-	function getResourceUri();
-
-	/**
-	 * @param $input
-	 */
-	function write($input);
-
+    /**
+     * @param $input
+     */
+    public function write($input);
 }

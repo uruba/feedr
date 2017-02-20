@@ -14,7 +14,6 @@ use Psr\Log\NullLogger;
  */
 class Feedr
 {
-
     /** @var string */
     private $tempPath = '';
 
@@ -110,5 +109,4 @@ class Feedr
     {
         $this->tempPath = $tempPath;
     }
-
 }

@@ -10,7 +10,6 @@ use Feedr\Interfaces\Specs\SpecEntity;
  */
 class Document extends SpecEntity
 {
-
     /** @return string[] */
     public function getXMLNamespaces()
     {
@@ -54,5 +53,4 @@ class Document extends SpecEntity
             'skipDays'
         ];
     }
-
 }

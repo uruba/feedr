@@ -12,7 +12,6 @@ use Feedr\Specs\RSS\Item;
  */
 class RSS extends Spec
 {
-
     const SPEC_NAME = 'RSS';
 
     /**
@@ -39,5 +38,4 @@ class RSS extends Spec
     {
         return \DateTime::RSS;
     }
-
 }

@@ -11,7 +11,6 @@ use Feedr\Interfaces\Spec;
  */
 class Feed // TODO - a partial duplication of Feedr\Beans\Feed\FeedItem class?
 {
-
     /** @var Spec */
     private $spec;
 
@@ -41,7 +40,7 @@ class Feed // TODO - a partial duplication of Feedr\Beans\Feed\FeedItem class?
             return $this->vals[$name];
         }
 
-        return NULL;
+        return null;
     }
 
     /**
@@ -83,5 +82,4 @@ class Feed // TODO - a partial duplication of Feedr\Beans\Feed\FeedItem class?
     {
         return $this->spec;
     }
-
 }

@@ -10,34 +10,32 @@ use Feedr\Interfaces\Specs\SpecEntity;
  */
 abstract class Spec
 {
+    /** @var SpecEntity */
+    protected $specDocument;
 
-	/** @var SpecEntity */
-	protected $specDocument;
+    /** @var SpecEntity */
+    protected $specItem;
 
-	/** @var SpecEntity */
-	protected $specItem;
+    /**
+     * Spec constructor.
+     */
+    abstract public function __construct();
 
-	/**
-	 * Spec constructor.
-	 */
-	abstract public function __construct();
+    /** @return SpecEntity */
+    public function getSpecDocument()
+    {
+        return $this->specDocument;
+    }
 
-	/** @return SpecEntity */
-	public function getSpecDocument()
-	{
-		return $this->specDocument;
-	}
+    /** @return SpecEntity */
+    public function getSpecItem()
+    {
+        return $this->specItem;
+    }
 
-	/** @return SpecEntity */
-	public function getSpecItem()
-	{
-		return $this->specItem;
-	}
+    /** @return string */
+    abstract public function getSpecName();
 
-	/** @return string */
-	abstract public function getSpecName();
-
-	/** @return string */
-	abstract public function getDateTimeFormat();
-
+    /** @return string */
+    abstract public function getDateTimeFormat();
 }
