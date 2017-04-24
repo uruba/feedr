@@ -3,3 +3,7 @@ vendor
 # IDEs
 .idea
 nbproject
+.vscode
+
+# Composer
+composer.lock
