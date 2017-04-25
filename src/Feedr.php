@@ -2,6 +2,7 @@
 
 namespace Feedr;
 
+use Feedr\Beans\FeedReadConfig;
 use Feedr\Core\Reader;
 use Feedr\Interfaces\InputSource;
 use Feedr\Interfaces\Spec;
@@ -14,24 +15,22 @@ use Psr\Log\NullLogger;
  */
 class Feedr
 {
-    /** @var string */
-    private $tempPath = '';
-
     /** @var Reader */
     private $reader;
-
-    /** @var Spec */
-    private $spec;
 
     /**
      * Feedr constructor.
      * @param Spec $mode
+     * @param string $tempPath
+     * @param $logger
      */
-    public function __construct(Spec $mode)
+    public function __construct(Spec $mode, $tempPath = '', $logger = null)
     {
-        $this->spec = $mode;
+        if (!($logger instanceof LoggerInterface)) {
+            $logger = new NullLogger();
+        }
 
-        $this->reader = new Reader($this->spec, new NullLogger());
+        $this->reader = new Reader(new FeedReadConfig($mode, $tempPath, $logger));
     }
 
     /**
@@ -41,7 +40,8 @@ class Feedr
      */
     public function readFeed(InputSource $inputSource, $validate = true)
     {
-        return $this->reader->read($inputSource, $validate, $this->tempPath);
+        // TODO - connect the validation mechanism
+        return $this->reader->read($inputSource);
     }
 
     /**
@@ -50,63 +50,15 @@ class Feedr
      */
     public function readFeedConstraintFrom(InputSource $inputSource, \DateTime $dateTime)
     {
-                // TODO - read only feed from a specified date(time) forth
+        // TODO - read only feed from a specified date(time) forth
     }
 
     /**
      * @param InputSource $inputSource
      * @return array
      */
-    public function validateFeed(InputSource $inputSource)
+    public function validateFeed(InputSource $inputSource, $validators)
     {
-        return $this->reader->validate($inputSource, $this->tempPath);
-    }
-
-    /**
-     * @return LoggerInterface
-     */
-    public function getLogger()
-    {
-        return $this->reader->getLogger();
-    }
-
-    /**
-     * @return Spec
-     */
-    public function getMode()
-    {
-        return $this->spec;
-    }
-
-    /**
-     * @return string
-     */
-    public function getTempPath()
-    {
-        return $this->tempPath;
-    }
-
-    /**
-     * @param LoggerInterface $logger
-     */
-    public function setLogger($logger)
-    {
-        $this->reader->setLogger($logger);
-    }
-
-    /**
-     * @param Spec $mode
-     */
-    public function setMode(Spec $mode)
-    {
-        $this->spec = $mode;
-    }
-
-    /**
-     * @param string $tempPath
-     */
-    public function setTempPath($tempPath)
-    {
-        $this->tempPath = $tempPath;
+        // TODO - implement separate validation
     }
 }

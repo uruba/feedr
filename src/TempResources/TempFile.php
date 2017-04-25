@@ -1,6 +1,6 @@
 <?php
 
-namespace Feedr\Beans;
+namespace Feedr\TempResources;
 
 use Feedr\Exceptions\TempFileException;
 use Feedr\Interfaces\TempResource;

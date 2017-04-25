@@ -2,8 +2,8 @@
 
 namespace Feedr\Interfaces;
 
-use Feedr\Beans\TempFile;
-use Feedr\Beans\TempStream;
+use Feedr\TempResources\TempFile;
+use Feedr\TempResources\TempStream;
 
 /**
  * Class InputSource

@@ -24,7 +24,7 @@ class StringInput extends InputSource
 
     /**
      * @param StringInput $tempPath
-     * @return \Feedr\Beans\TempFile
+     * @return \Feedr\TempResources\TempFile
      */
     public function createTempResource($tempPath)
     {
