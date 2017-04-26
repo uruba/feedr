@@ -8,7 +8,6 @@ use Feedr\Beans\FeedReadConfig;
 use Feedr\Exceptions\InvalidFeedException;
 use Feedr\Factories\XMLReaderFactory;
 use Feedr\Interfaces\InputSource;
-use Feedr\Interfaces\Validator;
 use Psr\Log\LoggerInterface;
 
 /**
@@ -41,19 +40,10 @@ class Reader
 
     /**
      * @param InputSource $inputSource
-     * @param array $validators
      * @return Feed
      */
-    public function read(InputSource $inputSource, $validators = [])
+    public function read(InputSource $inputSource)
     {
-        if (is_array($validators)) {
-            foreach ($validators as $validator) {
-                if ($validator instanceof Validator) {
-                    $validator->validate($inputSource, $this->feedReadConfig->getTempPath());
-                }
-            }
-        }
-
         $xmlReader = XMLReaderFactory::manufactureXmlReader(
             $inputSource,
             $this->feedReadConfig->getTempPath()

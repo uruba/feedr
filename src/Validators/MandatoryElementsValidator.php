@@ -14,25 +14,18 @@ use Feedr\Interfaces\Validator;
  */
 class MandatoryElementsValidator implements Validator
 {
-    /** @var Spec */
-    private $mode;
-
-    public function __construct(Spec $mode)
-    {
-        $this->mode = $mode;
-    }
-
     /**
+     * @param Spec $spec
      * @param InputSource $inputSource
-     * @param $tempPath
+     * @param string $tempPath
      * @return ValidationResult
      */
-    public function validate(InputSource $inputSource, $tempPath = '')
+    public function validate(Spec $spec, InputSource $inputSource, $tempPath = '')
     {
         $xmlReader = XMLReaderFactory::manufactureXmlReader($inputSource, $tempPath);
 
-        $specDocument = $this->mode->getSpecDocument();
-        $specItem = $this->mode->getSpecItem();
+        $specDocument = $spec->getSpecDocument();
+        $specItem = $spec->getSpecItem();
 
         $msgs = [];
 
@@ -79,7 +72,7 @@ class MandatoryElementsValidator implements Validator
                 if (count($mandatoryElemsItem) > 0) {
                     $valid = false;
                     $msgs[] = sprintf(
-                        "Not all mandatory elements are present in an entry beggining on line %u – elements '%s' 
+                        "Not all mandatory elements are present in an entry beginning on line %u – elements '%s' 
                         are missing",
                         $lineNo,
                         implode(', ', $mandatoryElemsItem)
@@ -87,6 +80,10 @@ class MandatoryElementsValidator implements Validator
                 }
             }
         } while ($xmlReader->next());
+
+        if ($valid) {
+            $msgs[] = 'All mandatory elements are present';
+        }
 
         return new ValidationResult($valid, $msgs);
     }

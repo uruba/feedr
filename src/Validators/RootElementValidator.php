@@ -10,24 +10,17 @@ use Feedr\Interfaces\Validator;
 
 class RootElementValidator implements Validator
 {
-    /** @var Spec */
-    private $mode;
-
-    public function __construct(Spec $mode)
-    {
-        $this->mode = $mode;
-    }
-
     /**
+     * @param Spec $spec
      * @param InputSource $inputSource
      * @param string $tempPath
      * @return ValidationResult
      */
-    public function validate(InputSource $inputSource, $tempPath = '')
+    public function validate(Spec $spec, InputSource $inputSource, $tempPath = '')
     {
         $xmlReader = XMLReaderFactory::manufactureXmlReader($inputSource, $tempPath);
 
-        $specDocument = $this->mode->getSpecDocument();
+        $specDocument = $spec->getSpecDocument();
 
         $msgs = [];
 
@@ -45,6 +38,10 @@ class RootElementValidator implements Validator
                     $specDocument->getRoot()
                 );
             }
+        }
+
+        if ($valid) {
+            $msgs[] = 'The root path is correct';
         }
 
         return new ValidationResult($valid, $msgs);

@@ -3,11 +3,12 @@
 namespace Feedr;
 
 use Feedr\Beans\FeedReadConfig;
+use Feedr\Beans\ValidationResult;
 use Feedr\Core\Reader;
+use Feedr\Core\ValidatorWrapper;
 use Feedr\Interfaces\InputSource;
 use Feedr\Interfaces\Spec;
-use Psr\Log\LoggerInterface;
-use Psr\Log\NullLogger;
+use Feedr\Interfaces\Validator;
 
 /**
  * Class Feedr
@@ -18,6 +19,9 @@ class Feedr
     /** @var Reader */
     private $reader;
 
+    /** @var FeedReadConfig */
+    private $feedReadConfig;
+
     /**
      * Feedr constructor.
      * @param Spec $mode
@@ -26,21 +30,17 @@ class Feedr
      */
     public function __construct(Spec $mode, $tempPath = '', $logger = null)
     {
-        if (!($logger instanceof LoggerInterface)) {
-            $logger = new NullLogger();
-        }
+        $this->feedReadConfig = new FeedReadConfig($mode, $tempPath, $logger);
 
-        $this->reader = new Reader(new FeedReadConfig($mode, $tempPath, $logger));
+        $this->reader = new Reader($this->feedReadConfig);
     }
 
     /**
      * @param InputSource $inputSource
-     * @param bool $validate
      * @return Beans\Feed
      */
-    public function readFeed(InputSource $inputSource, $validate = true)
+    public function readFeed(InputSource $inputSource)
     {
-        // TODO - connect the validation mechanism
         return $this->reader->read($inputSource);
     }
 
@@ -55,10 +55,16 @@ class Feedr
 
     /**
      * @param InputSource $inputSource
-     * @return array
+     * @param Validator[]|Validator $validators
+     * @return ValidationResult
      */
     public function validateFeed(InputSource $inputSource, $validators)
     {
-        // TODO - implement separate validation
+        $validatorWrapper = new ValidatorWrapper($inputSource);
+
+        return $validatorWrapper->validateFeed(
+            $this->feedReadConfig->getSpec(),
+            $validators
+        );
     }
 }
