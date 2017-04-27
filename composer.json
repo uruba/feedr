@@ -15,13 +15,8 @@
     "autoload": {
         "psr-4": {
             "Feedr\\": [
-                "src/"
-            ],
-            "Feedr\\Inputs\\": [
-                "inputs/"
-            ],
-            "Feedr\\Specs\\": [
-                "specs/"
+                "src/",
+                "modules/"
             ]
         }
     }
