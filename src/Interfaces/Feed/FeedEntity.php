@@ -2,7 +2,7 @@
 
 namespace Feedr\Interfaces\Feed;
 
-use Feedr\Interfaces\Spec;
+use Feedr\Interfaces\Specs\Spec;
 use Feedr\Interfaces\Specs\SpecEntity;
 
 abstract class FeedEntity

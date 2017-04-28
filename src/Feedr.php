@@ -7,7 +7,7 @@ use Feedr\Beans\ValidationResult;
 use Feedr\Core\Reader;
 use Feedr\Core\ValidatorWrapper;
 use Feedr\Interfaces\InputSource;
-use Feedr\Interfaces\Spec;
+use Feedr\Interfaces\Specs\Spec;
 use Feedr\Interfaces\Validator;
 
 /**

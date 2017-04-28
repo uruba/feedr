@@ -2,7 +2,7 @@
 
 namespace Feedr\Beans;
 
-use Feedr\Interfaces\Spec;
+use Feedr\Interfaces\Specs\Spec;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 

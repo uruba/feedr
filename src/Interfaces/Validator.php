@@ -3,6 +3,7 @@
 namespace Feedr\Interfaces;
 
 use Feedr\Beans\ValidationResult;
+use Feedr\Interfaces\Specs\Spec;
 
 interface Validator
 {

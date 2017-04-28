@@ -2,7 +2,7 @@
 
 namespace Feedr\Specs;
 
-use Feedr\Interfaces\Spec;
+use Feedr\Interfaces\Specs\Spec;
 use Feedr\Specs\Atom\Document;
 use Feedr\Specs\Atom\Item;
 

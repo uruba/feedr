@@ -5,7 +5,7 @@ namespace Feedr\Core;
 use Feedr\Beans\ValidationResult;
 use Feedr\Exceptions\NoValidValidatorsException;
 use Feedr\Interfaces\InputSource;
-use Feedr\Interfaces\Spec;
+use Feedr\Interfaces\Specs\Spec;
 use Feedr\Interfaces\Validator;
 
 class ValidatorWrapper

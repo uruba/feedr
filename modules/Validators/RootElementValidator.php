@@ -5,7 +5,7 @@ namespace Feedr\Validators;
 use Feedr\Beans\ValidationResult;
 use Feedr\Factories\XMLReaderFactory;
 use Feedr\Interfaces\InputSource;
-use Feedr\Interfaces\Spec;
+use Feedr\Interfaces\Specs\Spec;
 use Feedr\Interfaces\Validator;
 
 class RootElementValidator implements Validator
