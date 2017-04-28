@@ -1,8 +1,6 @@
 <?php
 
-namespace Feedr\Beans\Feed;
-
-use Feedr\Interfaces\Feed\FeedEntity;
+namespace Feedr\Core\Feed;
 
 /**
  * Class FeedItem
@@ -11,7 +9,7 @@ use Feedr\Interfaces\Feed\FeedEntity;
 class FeedItem extends FeedEntity
 {
     /**
-     * @return \Feedr\Interfaces\Specs\SpecEntity
+     * @return \Feedr\Core\Specs\SpecEntity
      */
     public function getSpecEntity()
     {

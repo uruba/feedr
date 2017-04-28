@@ -1,9 +1,9 @@
 <?php
 
-namespace Feedr\Interfaces;
+namespace Feedr\Core\Validation;
 
-use Feedr\Beans\ValidationResult;
-use Feedr\Interfaces\Specs\Spec;
+use Feedr\Core\Input\InputSource;
+use Feedr\Core\Specs\Spec;
 
 interface Validator
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Feedr\Interfaces\Specs;
+namespace Feedr\Core\Specs;
 
 /**
  * Class SpecEntity

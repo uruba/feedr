@@ -2,7 +2,7 @@
 
 namespace Feedr\Inputs;
 
-use Feedr\Interfaces\InputSource;
+use Feedr\Core\Input\InputSource;
 
 /**
  * Class StringInput
@@ -24,7 +24,7 @@ class StringInput extends InputSource
 
     /**
      * @param StringInput $tempPath
-     * @return \Feedr\TempResources\TempFile
+     * @return \Feedr\Core\Caching\TempResources\TempFile
      */
     public function createTempResource($tempPath)
     {

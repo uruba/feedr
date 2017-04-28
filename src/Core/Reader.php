@@ -2,12 +2,12 @@
 
 namespace Feedr\Core;
 
-use Feedr\Beans\Feed;
-use Feedr\Beans\Feed\FeedItem;
-use Feedr\Beans\FeedReadConfig;
+use Feedr\Core\Feed\Feed;
+use Feedr\Core\Feed\FeedItem;
+use Feedr\Core\Config\FeedReadConfig;
 use Feedr\Exceptions\InvalidFeedException;
 use Feedr\Factories\XMLReaderFactory;
-use Feedr\Interfaces\InputSource;
+use Feedr\Core\Input\InputSource;
 use Psr\Log\LoggerInterface;
 
 /**

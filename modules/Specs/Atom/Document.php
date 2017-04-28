@@ -2,7 +2,7 @@
 
 namespace Feedr\Specs\Atom;
 
-use Feedr\Interfaces\Specs\SpecEntity;
+use Feedr\Core\Specs\SpecEntity;
 
 /**
  * Class Document

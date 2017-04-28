@@ -1,12 +1,10 @@
 <?php
 
-namespace Feedr\Core;
+namespace Feedr\Core\Validation;
 
-use Feedr\Beans\ValidationResult;
 use Feedr\Exceptions\NoValidValidatorsException;
-use Feedr\Interfaces\InputSource;
-use Feedr\Interfaces\Specs\Spec;
-use Feedr\Interfaces\Validator;
+use Feedr\Core\Input\InputSource;
+use Feedr\Core\Specs\Spec;
 
 class ValidatorWrapper
 {

@@ -2,13 +2,13 @@
 
 namespace Feedr;
 
-use Feedr\Beans\FeedReadConfig;
-use Feedr\Beans\ValidationResult;
+use Feedr\Core\Config\FeedReadConfig;
+use Feedr\Core\Validation\ValidationResult;
 use Feedr\Core\Reader;
-use Feedr\Core\ValidatorWrapper;
-use Feedr\Interfaces\InputSource;
-use Feedr\Interfaces\Specs\Spec;
-use Feedr\Interfaces\Validator;
+use Feedr\Core\Validation\ValidatorWrapper;
+use Feedr\Core\Input\InputSource;
+use Feedr\Core\Specs\Spec;
+use Feedr\Core\Validation\Validator;
 
 /**
  * Class Feedr
@@ -37,7 +37,7 @@ class Feedr
 
     /**
      * @param InputSource $inputSource
-     * @return Beans\Feed
+     * @return \Feedr\Core\Feed\Feed
      */
     public function readFeed(InputSource $inputSource)
     {

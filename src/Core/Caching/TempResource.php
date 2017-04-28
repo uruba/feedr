@@ -1,6 +1,6 @@
 <?php
 
-namespace Feedr\Interfaces;
+namespace Feedr\Core\Caching;
 
 /**
  * Interface TempResource

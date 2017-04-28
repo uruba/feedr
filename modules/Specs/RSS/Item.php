@@ -2,7 +2,7 @@
 
 namespace Feedr\Specs\RSS;
 
-use Feedr\Interfaces\Specs\SpecEntity;
+use Feedr\Core\Specs\SpecEntity;
 
 /**
  * Class Item

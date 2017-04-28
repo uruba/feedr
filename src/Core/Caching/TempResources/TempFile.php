@@ -1,9 +1,9 @@
 <?php
 
-namespace Feedr\TempResources;
+namespace Feedr\Core\Caching\TempResources;
 
 use Feedr\Exceptions\TempFileException;
-use Feedr\Interfaces\TempResource;
+use Feedr\Core\Caching\TempResource;
 
 /**
  * Class TempFile

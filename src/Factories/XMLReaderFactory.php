@@ -2,8 +2,8 @@
 
 namespace Feedr\Factories;
 
-use Feedr\Interfaces\InputSource;
-use Feedr\Interfaces\TempResource;
+use Feedr\Core\Input\InputSource;
+use Feedr\Core\Caching\TempResource;
 
 class XMLReaderFactory
 {

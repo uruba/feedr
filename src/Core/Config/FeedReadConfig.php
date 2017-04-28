@@ -1,8 +1,8 @@
 <?php
 
-namespace Feedr\Beans;
+namespace Feedr\Core\Config;
 
-use Feedr\Interfaces\Specs\Spec;
+use Feedr\Core\Specs\Spec;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 

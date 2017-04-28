@@ -1,9 +1,9 @@
 <?php
 
-namespace Feedr\Interfaces\Feed;
+namespace Feedr\Core\Feed;
 
-use Feedr\Interfaces\Specs\Spec;
-use Feedr\Interfaces\Specs\SpecEntity;
+use Feedr\Core\Specs\Spec;
+use Feedr\Core\Specs\SpecEntity;
 
 abstract class FeedEntity
 {

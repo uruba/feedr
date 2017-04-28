@@ -1,6 +1,6 @@
 <?php
 
-namespace Feedr\Beans;
+namespace Feedr\Core\Validation;
 
 class ValidationResult
 {

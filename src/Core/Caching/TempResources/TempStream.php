@@ -1,8 +1,8 @@
 <?php
 
-namespace Feedr\TempResources;
+namespace Feedr\Core\Caching\TempResources;
 
-use Feedr\Interfaces\TempResource;
+use Feedr\Core\Caching\TempResource;
 
 /**
  * Class TempStream

@@ -1,9 +1,10 @@
 <?php
 
-namespace Feedr\Interfaces;
+namespace Feedr\Core\Input;
 
-use Feedr\TempResources\TempFile;
-use Feedr\TempResources\TempStream;
+use Feedr\Core\Caching\TempResource;
+use Feedr\Core\Caching\TempResources\TempFile;
+use Feedr\Core\Caching\TempResources\TempStream;
 
 /**
  * Class InputSource

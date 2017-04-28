@@ -2,7 +2,7 @@
 
 namespace Feedr\Inputs;
 
-use Feedr\Interfaces\InputSource;
+use Feedr\Core\Input\InputSource;
 
 /**
  * Class FileInput

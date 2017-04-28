@@ -2,11 +2,11 @@
 
 namespace Feedr\Validators;
 
-use Feedr\Beans\ValidationResult;
+use Feedr\Core\Validation\ValidationResult;
 use Feedr\Factories\XMLReaderFactory;
-use Feedr\Interfaces\InputSource;
-use Feedr\Interfaces\Specs\Spec;
-use Feedr\Interfaces\Validator;
+use Feedr\Core\Input\InputSource;
+use Feedr\Core\Specs\Spec;
+use Feedr\Core\Validation\Validator;
 
 /**
  * Class MandatoryElementsValidator
