@@ -7,7 +7,7 @@ use Feedr\Core\Caching\TempResource;
 
 /**
  * Class TempFile
- * @package Feedr\Beans
+ * @package Feedr\Core\Caching\TempResources
  */
 class TempFile implements TempResource
 {

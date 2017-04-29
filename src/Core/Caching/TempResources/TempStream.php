@@ -6,7 +6,7 @@ use Feedr\Core\Caching\TempResource;
 
 /**
  * Class TempStream
- * @package Feedr\Beans
+ * @package Feedr\Core\Caching\TempResources
  */
 class TempStream implements TempResource
 {

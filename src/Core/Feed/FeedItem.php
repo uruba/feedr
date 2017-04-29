@@ -4,7 +4,7 @@ namespace Feedr\Core\Feed;
 
 /**
  * Class FeedItem
- * @package Feedr\Beans\Feed
+ * @package Feedr\Core\Feed
  */
 class FeedItem extends FeedEntity
 {
