@@ -2,6 +2,8 @@
 
 namespace Feedr;
 
+use Feedr\Core\Filtering\MultiValueFiltersWrapper;
+use Feedr\Factories\ValueFilterFactory;
 use Feedr\Core\Config\FeedReadConfig;
 use Feedr\Core\Validation\ValidationResult;
 use Feedr\Core\Reader;
@@ -31,26 +33,20 @@ class Feedr
     public function __construct(Spec $mode, $tempPath = '', $logger = null)
     {
         $this->feedReadConfig = new FeedReadConfig($mode, $tempPath, $logger);
-
         $this->reader = new Reader($this->feedReadConfig);
     }
 
     /**
      * @param InputSource $inputSource
-     * @return \Feedr\Core\Feed\Feed
+     * @param array $filters
+     * @internal param Criterion $criterion
+     * @return Core\Feed\Feed
      */
-    public function readFeed(InputSource $inputSource)
+    public function readFeed(InputSource $inputSource, array $filters = [])
     {
-        return $this->reader->read($inputSource);
-    }
-
-    /**
-     * @param InputSource $inputSource
-     * @param \DateTime $dateTime
-     */
-    public function readFeedConstraintFrom(InputSource $inputSource, \DateTime $dateTime)
-    {
-        // TODO - read only feed from a specified date(time) forth
+        // TODO - the factory should maybe be a dependency of the entire Feedr class, do not create it here?
+        $filters = (new ValueFilterFactory())->manufactureValueFilters($filters);
+        return $this->reader->read($inputSource, new MultiValueFiltersWrapper($filters));
     }
 
     /**

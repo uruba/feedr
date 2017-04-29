@@ -5,6 +5,7 @@ namespace Feedr\Core;
 use Feedr\Core\Feed\Feed;
 use Feedr\Core\Feed\FeedItem;
 use Feedr\Core\Config\FeedReadConfig;
+use Feedr\Core\Filtering\MultiValueFiltersWrapper;
 use Feedr\Exceptions\InvalidFeedException;
 use Feedr\Factories\XMLReaderFactory;
 use Feedr\Core\Input\InputSource;
@@ -23,8 +24,9 @@ class Reader
      * Reader constructor.
      * @param FeedReadConfig $feedReadConfig
      */
-    public function __construct(FeedReadConfig $feedReadConfig)
-    {
+    public function __construct(
+        FeedReadConfig $feedReadConfig
+    ) {
         $this->feedReadConfig = $feedReadConfig;
     }
 
@@ -40,9 +42,10 @@ class Reader
 
     /**
      * @param InputSource $inputSource
+     * @param MultiValueFiltersWrapper $valueFilterWrapper
      * @return Feed
      */
-    public function read(InputSource $inputSource)
+    public function read(InputSource $inputSource, MultiValueFiltersWrapper $valueFilterWrapper)
     {
         $xmlReader = XMLReaderFactory::manufactureXmlReader(
             $inputSource,
@@ -100,15 +103,18 @@ class Reader
                     $feedItem = new FeedItem($mode);
 
                 foreach ($specItem->getAllElems() as $elem) {
-                        $subNodeVal = $this->getSubNodeValue($xmlElement, $elem);
+                    $subNodeVal = $this->getSubNodeValue($xmlElement, $elem);
 
                     if (!empty($subNodeVal)) {
                             $feedItem->{$elem} = $subNodeVal;
                     }
                 }
 
-                // Add the item to the item array in the feed object
-                $feed->addItem($feedItem);
+                // If the item is valid according to all filtering criteria...
+                if ($valueFilterWrapper->isItemValid($feedItem)) {
+                    // ...add the item to the item array in the feed object
+                    $feed->addItem($feedItem);
+                }
             }
         } while ($xmlReader->next());
 
