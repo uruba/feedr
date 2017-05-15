@@ -30,11 +30,17 @@ class Reader
         $this->feedReadConfig = $feedReadConfig;
     }
 
+    /**
+     * @return FeedReadConfig
+     */
     public function getFeedReadConfig()
     {
         return $this->feedReadConfig;
     }
 
+    /**
+     * @param FeedReadConfig $feedReadConfig
+     */
     public function setFeedReadConfig(FeedReadConfig $feedReadConfig)
     {
         $this->feedReadConfig = $feedReadConfig;
