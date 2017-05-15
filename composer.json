@@ -1,6 +1,6 @@
 {
     "name": "uruba/feedr",
-    "description": "Super-lightweigt RSS and Atom feed reader",
+    "description": "Super-lightweight RSS and Atom feed reader",
     "license": "Unlicense",
     "authors": [
         {
@@ -9,6 +9,7 @@
         }
     ],
     "require": {
+        "php" : ">=7.0",
         "guzzlehttp/guzzle": "^6.2",
         "psr/log": "^1.0"
     },
