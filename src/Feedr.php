@@ -9,7 +9,6 @@ use Feedr\Core\Validation\ValidationResult;
 use Feedr\Core\Reader;
 use Feedr\Core\Validation\ValidatorWrapper;
 use Feedr\Core\Input\InputSource;
-use Feedr\Core\Specs\Spec;
 use Feedr\Core\Validation\Validator;
 
 /**
@@ -21,19 +20,51 @@ class Feedr
     /** @var Reader */
     private $reader;
 
-    /** @var FeedReadConfig */
-    private $feedReadConfig;
+    /** @var ValueFilterFactory */
+    private $valueFilterFactory;
 
     /**
      * Feedr constructor.
-     * @param Spec $mode
-     * @param string $tempPath
-     * @param $logger
+     * @param Reader $reader
      */
-    public function __construct(Spec $mode, $tempPath = '', $logger = null)
+    public function __construct(Reader $reader)
     {
-        $this->feedReadConfig = new FeedReadConfig($mode, $tempPath, $logger);
-        $this->reader = new Reader($this->feedReadConfig);
+        $this->setReader($reader);
+
+        // TODO - maybe figure out a cleaner way?
+        $this->injectValueFilterFactory(new ValueFilterFactory());
+    }
+
+    /**
+     * @return Reader
+     */
+    public function getReader()
+    {
+        return $this->reader;
+    }
+
+    /**
+     * @param Reader $reader
+     */
+    public function setReader(Reader $reader)
+    {
+        $this->reader = $reader;
+    }
+
+    /**
+     * @param FeedReadConfig $feedReadConfig
+     */
+    public function changeReaderConfig(FeedReadConfig $feedReadConfig)
+    {
+        $this->reader->setFeedReadConfig($feedReadConfig);
+    }
+
+    /**
+     * @param ValueFilterFactory $valueFilterFactory
+     */
+    public function injectValueFilterFactory(ValueFilterFactory $valueFilterFactory)
+    {
+        $this->valueFilterFactory = $valueFilterFactory;
     }
 
     /**
@@ -44,8 +75,7 @@ class Feedr
      */
     public function readFeed(InputSource $inputSource, array $filters = [])
     {
-        // TODO - the factory should maybe be a dependency of the entire Feedr class, do not create it here?
-        $filters = (new ValueFilterFactory())->manufactureValueFilters($filters);
+        $filters = $this->valueFilterFactory->manufactureValueFilters($filters);
         return $this->reader->read($inputSource, new MultiValueFiltersWrapper($filters));
     }
 
@@ -59,7 +89,7 @@ class Feedr
         $validatorWrapper = new ValidatorWrapper($inputSource);
 
         return $validatorWrapper->validateFeed(
-            $this->feedReadConfig->getSpec(),
+            $this->reader->getFeedReadConfig()->getSpec(),
             $validators
         );
     }
