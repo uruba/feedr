@@ -19,7 +19,7 @@ class FeedReadConfig
 
     public function __construct(
         Spec $spec,
-        $tempPath,
+        $tempPath = '',
         $logger = null
     ) {
         $this->spec = $spec;

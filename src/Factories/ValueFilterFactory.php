@@ -9,9 +9,9 @@ class ValueFilterFactory
 {
     /**
      * @param array $filterDefinitions
-     * @return array
+     * @return ValueFilter[]
      */
-    public function manufactureValueFilters(array $filterDefinitions)
+    public function manufactureValueFilters(array $filterDefinitions) : array
     {
         $valueFilters = [];
 
