@@ -14,6 +14,11 @@ class ValidationResult
     /** @var string[] */
     private $messages;
 
+    /**
+     * ValidationResult constructor.
+     * @param $valid
+     * @param $messages
+     */
     public function __construct($valid, $messages)
     {
         $this->valid = $valid;

@@ -8,6 +8,10 @@ use Feedr\Factories\XMLReaderFactory;
 use Feedr\Core\Input\InputSource;
 use Feedr\Core\Validation\Validator;
 
+/**
+ * Class RootElementValidator
+ * @package Feedr\Validators
+ */
 class RootElementValidator implements Validator
 {
     /**

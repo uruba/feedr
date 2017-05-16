@@ -4,6 +4,10 @@ namespace Feedr\Core\Filtering;
 
 use Feedr\Exceptions\InvalidComparisionCallbackException;
 
+/**
+ * Class FilterCriterion
+ * @package Feedr\Core\Filtering
+ */
 class FilterCriterion
 {
     /**

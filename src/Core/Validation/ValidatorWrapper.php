@@ -6,6 +6,10 @@ use Feedr\Core\Config\FeedReadConfig;
 use Feedr\Exceptions\NoValidValidatorsException;
 use Feedr\Core\Input\InputSource;
 
+/**
+ * Class ValidatorWrapper
+ * @package Feedr\Core\Validation
+ */
 class ValidatorWrapper
 {
     /** @var InputSource */

@@ -6,6 +6,10 @@ use Feedr\Core\Specs\Spec;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 
+/**
+ * Class FeedReadConfig
+ * @package Feedr\Core\Config
+ */
 class FeedReadConfig
 {
     /** @var Spec */
