@@ -5,6 +5,10 @@ namespace Feedr\Factories;
 use Feedr\Core\Input\InputSource;
 use Feedr\Core\Caching\TempResource;
 
+/**
+ * Class XMLReaderFactory
+ * @package Feedr\Factories
+ */
 class XMLReaderFactory
 {
     /**

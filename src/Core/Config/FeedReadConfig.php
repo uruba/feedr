@@ -17,6 +17,12 @@ class FeedReadConfig
     /** @var LoggerInterface */
     private $logger;
 
+    /**
+     * FeedReadConfig constructor.
+     * @param Spec $spec
+     * @param string $tempPath
+     * @param null $logger
+     */
     public function __construct(
         Spec $spec,
         $tempPath = '',
@@ -27,36 +33,58 @@ class FeedReadConfig
         $this->logger = $this->initLogger($logger);
     }
 
+    /**
+     * @return Spec
+     */
     public function getSpec()
     {
         return $this->spec;
     }
 
+    /**
+     * @return string
+     */
     public function getTempPath()
     {
         return $this->tempPath;
     }
 
+    /**
+     * @return LoggerInterface|NullLogger
+     */
     public function getLogger()
     {
         return $this->logger;
     }
 
+    /**
+     * @param Spec $spec
+     */
     public function setSpec(Spec $spec)
     {
         $this->spec = $spec;
     }
 
+    /**
+     * @param $tempPath
+     */
     public function setTempPath($tempPath)
     {
         $this->tempPath = $tempPath;
     }
 
+    /**
+     * @param LoggerInterface $logger
+     */
     public function setLogger(LoggerInterface $logger)
     {
         $this->logger = $logger;
     }
 
+    /**
+     * @param $logger
+     * @return NullLogger
+     */
     private function initLogger($logger)
     {
         if (!($logger instanceof LoggerInterface)) {

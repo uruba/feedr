@@ -5,6 +5,10 @@ namespace Feedr\Core\Feed;
 use Feedr\Core\Specs\Spec;
 use Feedr\Core\Specs\SpecEntity;
 
+/**
+ * Class FeedEntity
+ * @package Feedr\Core\Feed
+ */
 abstract class FeedEntity
 {
     /** @var Spec */

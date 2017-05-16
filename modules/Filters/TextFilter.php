@@ -4,8 +4,17 @@ namespace Feedr\Filters;
 
 use Feedr\Core\Filtering\FilterCriterion;
 
+/**
+ * Class TextFilter
+ * @package Feedr\Filters
+ */
 class TextFilter
 {
+    /**
+     * @param string $refValue
+     * @param bool $caseSensitive
+     * @return FilterCriterion
+     */
     public static function equals(string $refValue, bool $caseSensitive)
     {
         return new FilterCriterion(
@@ -23,6 +32,11 @@ class TextFilter
         );
     }
 
+    /**
+     * @param string $refValue
+     * @param bool $caseSensitive
+     * @return FilterCriterion
+     */
     public static function contains(string $refValue, bool $caseSensitive)
     {
         return new FilterCriterion(

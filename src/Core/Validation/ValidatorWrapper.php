@@ -11,11 +11,20 @@ class ValidatorWrapper
     /** @var InputSource */
     private $inputSource;
 
+    /**
+     * ValidatorWrapper constructor.
+     * @param InputSource $inputSource
+     */
     public function __construct(InputSource $inputSource)
     {
         $this->inputSource = $inputSource;
     }
 
+    /**
+     * @param FeedReadConfig $feedReadConfig
+     * @param $validators
+     * @return ValidationResult
+     */
     public function validateFeed(FeedReadConfig $feedReadConfig, $validators)
     {
         $noValidValidators = true;

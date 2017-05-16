@@ -4,6 +4,10 @@ namespace Feedr\Core\Filtering;
 
 use Feedr\Core\Feed\FeedItem;
 
+/**
+ * Class ValueFilter
+ * @package Feedr\Core\Filtering
+ */
 class ValueFilter
 {
     const REFERENCE_TYPE = null;

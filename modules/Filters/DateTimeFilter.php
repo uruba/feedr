@@ -4,8 +4,16 @@ namespace Feedr\Filters;
 
 use Feedr\Core\Filtering\FilterCriterion;
 
+/**
+ * Class DateTimeFilter
+ * @package Feedr\Filters
+ */
 class DateTimeFilter
 {
+    /**
+     * @param \DateTime $refValue
+     * @return FilterCriterion
+     */
     public static function lowerThan(\DateTime $refValue)
     {
         return new FilterCriterion(
@@ -15,6 +23,10 @@ class DateTimeFilter
         );
     }
 
+    /**
+     * @param \DateTime $refValue
+     * @return FilterCriterion
+     */
     public static function equals(\DateTime $refValue)
     {
         return new FilterCriterion(
@@ -24,6 +36,10 @@ class DateTimeFilter
         );
     }
 
+    /**
+     * @param \DateTime $refValue
+     * @return FilterCriterion
+     */
     public static function greaterThan(\DateTime $refValue)
     {
         return new FilterCriterion(

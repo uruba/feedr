@@ -10,7 +10,11 @@ use Feedr\Core\Validation\Validator;
 
 class RootElementValidator implements Validator
 {
-
+    /**
+     * @param FeedReadConfig $feedReadConfig
+     * @param InputSource $inputSource
+     * @return ValidationResult
+     */
     public function validate(FeedReadConfig $feedReadConfig, InputSource $inputSource)
     {
         $xmlReader = XMLReaderFactory::manufactureXmlReader($inputSource, $feedReadConfig->getTempPath());

@@ -2,6 +2,10 @@
 
 namespace Feedr\Core\Validation;
 
+/**
+ * Class ValidationResult
+ * @package Feedr\Core\Validation
+ */
 class ValidationResult
 {
     /** @var boolean */

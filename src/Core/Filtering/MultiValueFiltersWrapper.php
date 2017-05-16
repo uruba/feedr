@@ -4,6 +4,10 @@ namespace Feedr\Core\Filtering;
 
 use Feedr\Core\Feed\FeedItem;
 
+/**
+ * Class MultiValueFiltersWrapper
+ * @package Feedr\Core\Filtering
+ */
 class MultiValueFiltersWrapper
 {
     /** @var ValueFilter[] */

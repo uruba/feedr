@@ -5,6 +5,10 @@ namespace Feedr\Core\Validation;
 use Feedr\Core\Config\FeedReadConfig;
 use Feedr\Core\Input\InputSource;
 
+/**
+ * Interface Validator
+ * @package Feedr\Core\Validation
+ */
 interface Validator
 {
     /**

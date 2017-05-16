@@ -5,6 +5,10 @@ namespace Feedr\Factories;
 use Feedr\Core\Filtering\FilterCriterion;
 use Feedr\Core\Filtering\ValueFilter;
 
+/**
+ * Class ValueFilterFactory
+ * @package Feedr\Factories
+ */
 class ValueFilterFactory
 {
     /**
