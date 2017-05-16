@@ -89,7 +89,7 @@ class Feedr
         $validatorWrapper = new ValidatorWrapper($inputSource);
 
         return $validatorWrapper->validateFeed(
-            $this->reader->getFeedReadConfig()->getSpec(),
+            $this->reader->getFeedReadConfig(),
             $validators
         );
     }
