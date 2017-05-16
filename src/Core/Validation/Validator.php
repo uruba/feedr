@@ -2,16 +2,15 @@
 
 namespace Feedr\Core\Validation;
 
+use Feedr\Core\Config\FeedReadConfig;
 use Feedr\Core\Input\InputSource;
-use Feedr\Core\Specs\Spec;
 
 interface Validator
 {
     /**
-     * @param Spec $spec
+     * @param FeedReadConfig $feedReadConfig
      * @param InputSource $inputSource
-     * @param string $tempPath
      * @return ValidationResult
      */
-    public function validate(Spec $spec, InputSource $inputSource, $tempPath = '');
+    public function validate(FeedReadConfig $feedReadConfig, InputSource $inputSource);
 }

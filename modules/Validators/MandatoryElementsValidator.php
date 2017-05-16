@@ -2,10 +2,10 @@
 
 namespace Feedr\Validators;
 
+use Feedr\Core\Config\FeedReadConfig;
 use Feedr\Core\Validation\ValidationResult;
 use Feedr\Factories\XMLReaderFactory;
 use Feedr\Core\Input\InputSource;
-use Feedr\Core\Specs\Spec;
 use Feedr\Core\Validation\Validator;
 
 /**
@@ -15,15 +15,15 @@ use Feedr\Core\Validation\Validator;
 class MandatoryElementsValidator implements Validator
 {
     /**
-     * @param Spec $spec
+     * @param FeedReadConfig $feedReadConfig
      * @param InputSource $inputSource
-     * @param string $tempPath
      * @return ValidationResult
      */
-    public function validate(Spec $spec, InputSource $inputSource, $tempPath = '')
+    public function validate(FeedReadConfig $feedReadConfig, InputSource $inputSource)
     {
-        $xmlReader = XMLReaderFactory::manufactureXmlReader($inputSource, $tempPath);
+        $xmlReader = XMLReaderFactory::manufactureXmlReader($inputSource, $feedReadConfig->getTempPath());
 
+        $spec = $feedReadConfig->getSpec();
         $specDocument = $spec->getSpecDocument();
         $specItem = $spec->getSpecItem();
 

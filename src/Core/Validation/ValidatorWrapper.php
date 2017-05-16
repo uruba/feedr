@@ -2,9 +2,9 @@
 
 namespace Feedr\Core\Validation;
 
+use Feedr\Core\Config\FeedReadConfig;
 use Feedr\Exceptions\NoValidValidatorsException;
 use Feedr\Core\Input\InputSource;
-use Feedr\Core\Specs\Spec;
 
 class ValidatorWrapper
 {
@@ -16,7 +16,7 @@ class ValidatorWrapper
         $this->inputSource = $inputSource;
     }
 
-    public function validateFeed(Spec $spec, $validators)
+    public function validateFeed(FeedReadConfig $feedReadConfig, $validators)
     {
         $noValidValidators = true;
 
@@ -30,11 +30,11 @@ class ValidatorWrapper
             &$noValidValidators,
             &$isDocumentValid,
             &$messages,
-            $spec
+            $feedReadConfig
         ) {
             $noValidValidators = false;
             $validationResult = $validator->validate(
-                $spec,
+                $feedReadConfig,
                 $this->inputSource
             );
 
