@@ -23,5 +23,12 @@
                 "modules/"
             ]
         }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Feedr\\Test\\": [
+                "tests/"
+            ]
+        }
     }
 }
